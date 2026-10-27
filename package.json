@@ -1,0 +1,9 @@
+{
+  "name": "santi-belfiore-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hub + automatización de entrega del Reto de 21 Días",
+  "engines": {
+    "node": ">=18"
+  }
+}

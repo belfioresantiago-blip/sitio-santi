@@ -1,0 +1,12 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["netlify/functions/assets/*"]
+
+[[redirects]]
+  from = "/api/mp-webhook"
+  to = "/.netlify/functions/mp-webhook"
+  status = 200

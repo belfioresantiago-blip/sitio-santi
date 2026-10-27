@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4578414795776331');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4578414795776331&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto de 21 Días — Santi Belfiore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0a09; --gold:#ffab2e; --gold-dim:#c17d1f; --gold-light:#ffd166;
+    --cream:#efe9dc; --muted:#a8a29a; --glass-bg:rgba(255,255,255,0.06);
+    --glass-border:rgba(255,255,255,0.14); --glass-bg-strong:rgba(255,255,255,0.1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink); color:var(--cream); font-family:'Inter',sans-serif;
+    overflow-x:hidden; position:relative;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .blob{position:fixed; border-radius:50%; filter:blur(90px); z-index:0; pointer-events:none;}
+  .blob1{width:420px; height:420px; background:radial-gradient(circle,rgba(195,152,92,0.35),transparent 70%); top:-120px; left:-140px;}
+  .blob2{width:380px; height:380px; background:radial-gradient(circle,rgba(138,109,64,0.3),transparent 70%); top:600px; right:-160px;}
+  .blob3{width:340px; height:340px; background:radial-gradient(circle,rgba(230,201,138,0.22),transparent 70%); bottom:400px; left:-120px;}
+
+  .glass{
+    background:var(--glass-bg); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+    border:1px solid var(--glass-border); border-radius:28px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+    box-shadow:0 0 0 rgba(0,0,0,0);
+  }
+  @media (hover:hover) and (pointer:fine){
+    .glass:hover{
+      transform:translateY(-6px);
+      box-shadow:0 26px 44px rgba(0,0,0,0.45), 0 8px 18px rgba(195,152,92,0.15);
+      border-color:rgba(195,152,92,0.4);
+    }
+    nav.glass:hover{ transform:none; }
+    .split .col:hover{ transform:translateY(-6px); box-shadow:0 26px 44px rgba(0,0,0,0.45); }
+  }
+  .glass:active{
+    transform:translateY(-4px) scale(0.99);
+    box-shadow:0 20px 36px rgba(0,0,0,0.45), 0 6px 14px rgba(195,152,92,0.2);
+    border-color:rgba(195,152,92,0.45);
+  }
+  nav.glass:active{ transform:none; box-shadow:none; border-color:var(--glass-border); }
+  .split .col:active{ transform:translateY(-4px) scale(0.99); box-shadow:0 20px 36px rgba(0,0,0,0.45); }
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .wrap{position:relative; z-index:1; max-width:520px; margin:0 auto; padding:16px 16px 60px;}
+
+  nav.glass{
+    display:flex; align-items:center; justify-content:center; gap:22px;
+    padding:14px 18px; margin-bottom:20px; position:sticky; top:12px; z-index:10;
+  }
+  nav .brand{font-family:'Fraunces',serif; font-weight:600; font-size:14px; letter-spacing:0.1em; color:var(--gold-light);}
+  nav .nav-link{font-size:12px; color:var(--muted); font-weight:600; background:none; border:none; padding:0; font-family:'Inter',sans-serif; cursor:pointer;}
+
+  .hero{padding:36px 24px 28px; text-align:center; position:relative; overflow:hidden;}
+  .hero-photo{
+    width:100%; max-width:280px; margin:0 auto 22px; border-radius:22px; overflow:hidden;
+    border:1px solid var(--glass-border); box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  }
+  .hero-photo img{width:100%; display:block; object-fit:cover; aspect-ratio:3/4;}
+  .tagline{font-family:'Fraunces',serif; font-size:11.5px; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); margin-bottom:16px;}
+  .hero h1{font-family:'Fraunces',serif; font-weight:600; font-size:32px; line-height:1.2; margin-bottom:14px;}
+  .hero h1 em{font-style:italic; color:var(--gold-light); font-weight:700;}
+  .hero p{color:var(--muted); font-size:14.5px; line-height:1.55; max-width:340px; margin:0 auto 24px;}
+
+  .cta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .btn{padding:14px 24px; border-radius:999px; font-size:13.5px; font-weight:700; display:inline-flex; align-items:center; gap:6px;}
+  .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dim)); color:#1b1305; box-shadow:0 10px 26px rgba(195,152,92,0.35);}
+  .btn-glass{background:var(--glass-bg-strong); backdrop-filter:blur(10px); border:1px solid var(--glass-border); color:var(--cream);}
+
+  .stats-bar{display:flex; justify-content:space-between; padding:20px 22px; margin:22px 0; gap:6px;}
+  .stat{text-align:center; flex:1;}
+  .stat .n{font-family:'Fraunces',serif; font-weight:700; font-size:19px; color:var(--gold-light);}
+  .stat .l{font-size:9.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:2px;}
+
+  .split{display:flex; gap:10px; margin:26px 0; position:relative;}
+  .split .col{flex:1; border-radius:20px; overflow:hidden; position:relative; border:1px solid var(--glass-border); transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;}
+  .split .col img{width:100%; height:100%; object-fit:cover; aspect-ratio:3/4;}
+  .split .ph{width:100%; height:100%; aspect-ratio:3/4; background:linear-gradient(150deg,#1b1815,#0f0d0b); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-align:center; padding:12px;}
+  .split .tag{position:absolute; bottom:10px; left:10px; right:10px; background:rgba(11,10,9,0.6); backdrop-filter:blur(8px); border-radius:10px; padding:8px 10px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;}
+
+  .eyebrow{font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; text-align:center;}
+  h2{font-family:'Fraunces',serif; font-weight:500; font-size:24px; line-height:1.3; text-align:center; margin-bottom:22px;}
+
+  .offer-panel{padding:26px 22px; margin:26px 0;}
+  .offer-row{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,0.08);}
+  .offer-row .num{font-family:'Fraunces',serif; color:var(--gold); font-size:13px; min-width:18px;}
+  .offer-row .name{font-weight:600; font-size:14px; margin-bottom:2px;}
+  .offer-row .desc{font-size:12px; color:var(--muted); line-height:1.4;}
+  .offer-row .val{font-size:12px; color:var(--muted); white-space:nowrap;}
+  .offer-total{display:flex; justify-content:space-between; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);}
+  .offer-total .l{font-size:13px; color:var(--muted);}
+  .offer-total .v{font-family:'Fraunces',serif; font-size:17px; color:var(--muted); text-decoration:line-through;}
+  .offer-final{display:flex; justify-content:space-between; align-items:flex-end; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);}
+  .offer-final .l{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted);}
+  .offer-final .v{font-family:'Fraunces',serif; font-optical-sizing:auto; font-size:46px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:var(--cream);}
+  .offer-final .v .cur{font-size:22px; font-weight:600; color:var(--gold); vertical-align:0.42em; margin-right:2px;}
+  .buy-btn{display:block; text-align:center; margin-top:18px; padding:16px; border-radius:16px; background:linear-gradient(135deg,var(--gold),var(--gold-dim)); color:#1b1305; font-family:'Fraunces',serif; font-weight:700; font-size:16px; box-shadow:0 14px 30px rgba(195,152,92,0.3);}
+  .whatsapp-claim{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px; padding:13px; border-radius:14px; background:rgba(95,208,104,0.12); border:1px solid rgba(95,208,104,0.35); color:#5fd068; font-size:12.5px; font-weight:700;}
+
+  .statement{text-align:center; padding:30px 20px; margin:30px 0;}
+  .statement h3{font-family:'Fraunces',serif; font-weight:600; font-size:20px; letter-spacing:0.02em; color:var(--gold-light); line-height:1.6;}
+
+  .glass-list{display:flex; flex-direction:column; gap:12px; margin:22px 0;}
+  .glass-list .item{padding:18px 20px; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .glass-list .name{font-family:'Fraunces',serif; font-weight:600; font-size:15px;}
+  .glass-list .sub{font-size:11.5px; color:var(--muted); margin-top:3px;}
+  .glass-list .arrow{color:var(--gold); font-size:16px;}
+
+  .testi-grid{display:flex; flex-direction:column; gap:12px; margin:22px 0;}
+  .testi{padding:18px 20px;}
+  .testi .stars{color:var(--gold); font-size:12px; margin-bottom:8px; letter-spacing:2px;}
+  .testi p{font-size:13px; line-height:1.55; color:var(--cream); margin-bottom:10px;}
+  .testi .who{font-size:11.5px; color:var(--muted);}
+
+  .rule-panel{padding:28px 22px; text-align:center; margin:26px 0;}
+  .rule-panel .badge{width:48px; height:48px; border-radius:50%; margin:0 auto 14px; background:rgba(195,152,92,0.15); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:18px;}
+  .rule-panel h3{font-family:'Fraunces',serif; font-weight:600; font-size:17px; margin-bottom:8px;}
+  .rule-panel p{font-size:13px; color:var(--muted); line-height:1.5;}
+
+  .final-glass{padding:32px 22px; text-align:center; margin:30px 0 10px;}
+  .final-glass h2{margin-bottom:16px;}
+  .final-glass .note{font-size:11.5px; color:var(--muted); margin-top:10px;}
+
+  .method-badge{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--gold-light); background:rgba(195,152,92,0.12); border:1px solid rgba(195,152,92,0.35);
+    padding:6px 14px; border-radius:999px; margin-bottom:14px;
+  }
+  .subpromise{font-size:13px; font-weight:700; color:var(--gold-light); max-width:340px; margin:0 auto 10px; line-height:1.4;}
+  .trust-row{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:16px;}
+  .trust-row span{font-size:10.5px; color:var(--muted); font-weight:600;}
+
+  .scarcity-panel{display:flex; gap:16px; align-items:center; padding:22px; margin:20px 0;}
+  .scarcity-left{text-align:center; min-width:70px; flex:0 0 auto; border-right:1px solid rgba(255,255,255,0.1); padding-right:16px;}
+  .scarcity-num{font-family:'Fraunces',serif; font-weight:700; font-size:34px; color:var(--gold-light); line-height:1;}
+  .scarcity-label{font-size:9.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin-top:4px; line-height:1.3;}
+  .scarcity-title{font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; margin-bottom:5px;}
+  .scarcity-desc{font-size:12px; color:var(--muted); line-height:1.5;}
+  .diff-grid{display:flex; flex-direction:column; gap:10px; margin:22px 0;}
+  .community-panel{padding:24px 22px; text-align:center; margin:0 0 26px;}
+  .community-badge{display:inline-block; font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; color:var(--gold-light); background:rgba(195,152,92,0.12); border:1px solid rgba(195,152,92,0.35); padding:7px 16px; border-radius:999px; margin-bottom:12px;}
+  .community-text{font-size:13px; color:var(--muted); line-height:1.6; max-width:380px; margin:0 auto;}
+  .whatsapp-tag{display:inline-flex; align-items:center; gap:7px; margin-top:16px; font-size:11.5px; font-weight:700; color:#5fd068; background:rgba(95,208,104,0.12); border:1px solid rgba(95,208,104,0.35); padding:7px 14px; border-radius:999px;}
+  .still-time{font-size:11.5px; font-weight:800; color:var(--gold-light); text-align:center; letter-spacing:0.02em;}
+  .diff-row{display:flex; align-items:center; gap:8px; padding:14px 16px; background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:16px;}
+  .diff-other{flex:1; font-size:11.5px; color:var(--muted); text-decoration:line-through; line-height:1.4;}
+  .diff-arrow{color:var(--gold); font-size:14px; flex:0 0 auto;}
+  .diff-us{flex:1; font-size:12px; color:var(--cream); font-weight:600; line-height:1.4;}
+  @media(max-width:400px){ .diff-row{flex-direction:column; align-items:flex-start; gap:6px;} .diff-arrow{display:none;} }
+
+  .weeks{display:flex; flex-direction:column; gap:12px; margin:22px 0;}
+  .week{padding:18px 20px; display:flex; gap:14px; align-items:flex-start;}
+  .week .n{font-family:'Fraunces',serif; color:var(--gold); font-size:22px; font-weight:700; min-width:30px;}
+  .week .t{font-family:'Fraunces',serif; font-weight:600; font-size:15px; margin-bottom:4px;}
+  .week .d{font-size:12.5px; color:var(--muted); line-height:1.45;}
+
+  .bonus-grid{display:flex; flex-direction:column; gap:12px; margin:22px 0;}
+  .bonus{padding:18px 66px 18px 20px; display:flex; gap:14px; align-items:flex-start; position:relative;}
+  .bonus .icon{width:38px; height:38px; border-radius:12px; background:rgba(195,152,92,0.15); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto; color:var(--gold-light);}
+  .bonus .name{font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; margin-bottom:3px;}
+  .bonus .desc{font-size:12.5px; color:var(--muted); line-height:1.45;}
+  .bonus .tag-free{position:absolute; top:14px; right:16px; font-size:9.5px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#1b1305; background:linear-gradient(135deg,var(--gold),var(--gold-light)); padding:4px 9px; border-radius:999px;}
+
+  .bonus-value-badge{
+    display:block; text-align:center; margin:12px auto 18px;
+    max-width:300px;
+    padding:9px 16px;
+    border-radius:999px;
+    background:linear-gradient(135deg, rgba(255,171,46,0.22), rgba(255,209,102,0.12));
+    border:1px solid rgba(255,171,46,0.5);
+    font-family:'Fraunces',serif; font-weight:700; font-size:13.5px;
+    color:var(--gold-light);
+  }
+
+  .faq-list{display:flex; flex-direction:column; gap:10px; margin:22px 0;}
+  .faq-item{overflow:hidden;}
+  .faq-item summary{list-style:none; cursor:pointer; padding:16px 44px 16px 18px; position:relative; font-family:'Fraunces',serif; font-weight:600; font-size:14px;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:'+'; position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:20px; color:var(--gold); transition:transform .25s ease; font-weight:400;}
+  .faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg);}
+  .faq-item .a{padding:0 18px 18px; font-size:13px; color:var(--muted); line-height:1.55;}
+
+  footer{text-align:center; padding:20px; font-size:11px; color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<div class="wrap">
+
+  <nav class="glass reveal">
+    <span class="brand">SB</span>
+    <button class="nav-link" data-target="reto">Reto</button>
+    <button class="nav-link" data-target="testimonios">Historias</button>
+  </nav>
+
+  <section class="glass hero reveal" id="reto">
+    <div class="tagline">Ser + Hacer = Tener</div>
+    <div class="method-badge">El Método de los 21 Días</div>
+    <p style="font-size:13.5px; color:var(--muted); font-style:italic; max-width:320px; margin:0 auto 18px; line-height:1.5;">¿Hace cuánto sabés exactamente lo que tenés que hacer... y hoy, otra vez, no lo hiciste?</p>
+    <h1>De estancado<br>a <em>imparable</em></h1>
+    <p class="subpromise">Sin depender de la fuerza de voluntad. Sin otro intento que se cae a la semana.</p>
+    <p>No es magia ni otro "sé más disciplinado". Es el mismo sistema, día por día, que usé para salir de mi propio estancamiento — te lo paso completo, tal cual lo viví.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://mpago.la/1YvUZTB" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Empezar el reto →</a>
+    </div>
+    <div class="trust-row">
+      <span>🔒 Pago seguro</span>
+      <span>⚡ Acceso inmediato</span>
+      <span>🎟️ Cupos limitados</span>
+    </div>
+  </section>
+
+  <div class="glass scarcity-panel reveal">
+    <div class="scarcity-left">
+      <div class="scarcity-num">3</div>
+      <div class="scarcity-label">cupos disponibles<br>en esta camada</div>
+    </div>
+    <div class="scarcity-right">
+      <div class="scarcity-title">Acompañamiento real a los primeros 10</div>
+      <div class="scarcity-desc">Los primeros 10 de esta camada reciben seguimiento personalizado mío durante el reto — no un PDF y listo. Después de esos cupos, seguís acompañado por la comunidad.</div>
+    </div>
+  </div>
+
+  <div class="glass stats-bar reveal">
+    <div class="stat"><div class="n">21</div><div class="l">Días</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Semanas</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Excusas</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Camada</div></div>
+  </div>
+
+  <p class="reveal" style="text-align:center; font-size:12.5px; color:var(--muted); max-width:380px; margin:0 auto 30px; line-height:1.6;">
+    Sin cronómetros falsos ni descuentos inventados. Cada camada arranca junta y avanza junta — cuando cierra esta, la próxima abre a otro precio. Así de simple.
+  </p>
+
+  <div class="reveal">
+    <div class="eyebrow">Resultados reales</div>
+    <h2>Esto no es teoría.<br>Es lo que ya pasó.</h2>
+  </div>
+  <div class="split reveal">
+    <div class="col"><img src="https://i.ibb.co/KjjdhLgg/20230108-124904-Original-Original.jpg" alt="Antes" loading="lazy" decoding="async"><div class="tag">Antes</div></div>
+    <div class="col"><img src="https://i.ibb.co/8n4RGcWf/IMG-6183.jpg" alt="Después" loading="lazy" decoding="async"><div class="tag">Después</div></div>
+  </div>
+
+  <div class="reveal">
+    <div class="eyebrow">Por qué esto no es "otro reto más"</div>
+    <h2>Lo que te vendieron<br>antes, y lo que es esto</h2>
+  </div>
+  <div class="diff-grid reveal">
+    <div class="diff-row"><div class="diff-other">Un ebook con consejos sueltos</div><div class="diff-arrow">→</div><div class="diff-us">Un sistema estructurado en 3 semanas, día por día</div></div>
+    <div class="diff-row" style="flex-direction:column; align-items:stretch; gap:6px;">
+      <div style="display:flex; align-items:center; gap:8px;"><div class="diff-other" style="flex:1;">Lo comprás y quedás solo</div><div class="diff-arrow">→</div><div class="diff-us" style="flex:1;">Comunidad incluida + acompañamiento real a los primeros 10</div></div>
+      <div class="still-time">⏳ Todavía estás a tiempo de entrar</div>
+    </div>
+    <div class="diff-row"><div class="diff-other">Si fallás, lo abandonás en silencio</div><div class="diff-arrow">→</div><div class="diff-us">Si fallás, reiniciás desde el Día 1 — nadie te suelta</div></div>
+    <div class="diff-row"><div class="diff-other">Un autor que nunca lo vivió</div><div class="diff-arrow">→</div><div class="diff-us">Mi propia transformación, documentada, no una teoría bajada de internet</div></div>
+    <div class="diff-row"><div class="diff-other">Una comunidad de compradores anónimos</div><div class="diff-arrow">→</div><div class="diff-us">Comunidad de Ganadores: gente que se apoya de por vida, no solo 21 días</div></div>
+  </div>
+
+  <div class="glass community-panel reveal">
+    <div class="community-badge">Comunidad de Ganadores</div>
+    <p class="community-text">No armamos solo una transformación individual. Armamos un entorno — gente que se sostiene entre sí de por vida, que construye relaciones y compañerismo real más allá del reto. No comprás un PDF que descargás y olvidás: entrás a un lugar donde te van a conocer por tu nombre, y donde en un mes vas a ser vos quien sostenga a alguien más.</p>
+    <div class="whatsapp-tag">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.32a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.24-8.24m-4.53 4.7c-.17 0-.45.06-.68.32-.23.25-.9.87-.9 2.13 0 1.25.92 2.46 1.05 2.63.13.17 1.79 2.87 4.43 3.91.62.24 1.1.39 1.48.5.62.2 1.19.17 1.63.1.5-.07 1.53-.62 1.75-1.23s.22-1.12.15-1.23c-.06-.1-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.53-1.43-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.5-.42-.44-.58-.45z"/></svg>
+      Grupo privado de WhatsApp — solo para alumnos
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="eyebrow">Cómo está estructurado</div>
+    <h2>3 semanas.<br>Un arco completo.</h2>
+  </div>
+  <div class="weeks reveal">
+    <div class="glass week"><span class="n">01</span><div><div class="t">Romper (días 1-7)</div><div class="d">Cortar el piloto automático e instalar las bases: entrenamiento, macros, mentalidad.</div></div></div>
+    <div class="glass week"><span class="n">02</span><div><div class="t">Construir (días 8-14)</div><div class="d">Reprogramar la mente e instalar identidad nueva.</div></div></div>
+    <div class="glass week"><span class="n">03</span><div><div class="t">Consolidar (días 15-21)</div><div class="d">Que la nueva versión deje de ser esfuerzo y se vuelva quien sos.</div></div></div>
+  </div>
+
+  <div class="glass statement reveal">
+    <h3>Romper · Construir · Consolidar</h3>
+  </div>
+
+  <div class="reveal">
+    <div class="eyebrow">Además del reto</div>
+    <h2>🎁 Bonos <span style="color:var(--gold-light);">REGALO</span> de esta camada</h2>
+    <span class="bonus-value-badge">+ $76.900 en regalos, incluidos gratis hoy</span>
+    <p style="text-align:center; font-size:12.5px; color:var(--muted); max-width:380px; margin:0 auto 20px; line-height:1.55;">No son relleno para inflar el precio. Son lo que sostiene el cambio cuando el reto termina.</p>
+  </div>
+  <div class="bonus-grid reveal">
+    <div class="glass bonus">
+      <span class="tag-free">Regalo</span>
+      <div class="icon">🧭</div>
+      <div><div class="name">El Mapa de la Conciencia</div><div class="desc">La escala de Hawkins explicada nivel por nivel y aplicada a algo concreto cada día del reto — no una idea abstracta que se olvida.</div></div>
+    </div>
+    <div class="glass bonus">
+      <span class="tag-free">Regalo</span>
+      <div class="icon">🎥</div>
+      <div><div class="name">Sesión grupal en vivo de arranque</div><div class="desc">Empezás con foco junto a toda la camada, no a ciegas leyendo un PDF solo.</div></div>
+    </div>
+    <div class="glass bonus">
+      <span class="tag-free">Regalo</span>
+      <div class="icon">✓</div>
+      <div><div class="name">Checklist diario imprimible</div><div class="desc">Un solo lugar para tachar tu avance real, día a día — sin depender de la memoria.</div></div>
+    </div>
+    <div class="glass bonus">
+      <span class="tag-free">Regalo</span>
+      <div class="icon">👥</div>
+      <div><div class="name">30 días de acceso a la comunidad</div><div class="desc">Para no sostener el cambio vos solo el día 22, cuando la mayoría de los retos te sueltan.</div></div>
+    </div>
+    <div class="glass bonus">
+      <span class="tag-free">Regalo</span>
+      <div class="icon">📄</div>
+      <div><div class="name">Guía: 5 hábitos no negociables</div><div class="desc">Los hábitos que sí se sostienen en el tiempo, con un bonus extra adentro — para cuando termines el reto.</div></div>
+    </div>
+  </div>
+
+  <div class="reveal" id="testimonios">
+    <div class="eyebrow">Lo que dicen</div>
+    <h2>No te lo cuento yo solo</h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="glass testi"><div class="stars">★★★★★</div><p>"Llegué después de meses posponiendo todo — el gimnasio, mi negocio, hasta las cosas simples. En 21 días no solo bajé grasa y gané fuerza: por primera vez terminé algo hasta el final. Eso se me notó en cómo encaré mi trabajo después."</p><div class="who">— Florencia O.</div></div>
+    <div class="glass testi"><div class="stars">★★★★★</div><p>"Sabía exactamente qué tenía que hacer y nunca lo sostenía más de 3 días. El sistema me obligó a no negociar conmigo mismo — al final del reto tenía otro cuerpo, pero sobre todo dejé de sentirme como espectador de mi propia vida."</p><div class="who">— Matías B.</div></div>
+  </div>
+
+  <div class="glass rule-panel reveal">
+    <div class="badge">↺</div>
+    <h3>No te prometo que va a ser fácil</h3>
+    <p>Te prometo que si lo sostenés, funciona. No hay devolución mágica — hay algo más fuerte: si fallás un día, reiniciás desde el Día 1 conmigo, no solo.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="eyebrow">Antes de que arranques</div>
+    <h2>Preguntas frecuentes</h2>
+  </div>
+  <div class="faq-list reveal">
+    <details class="glass faq-item">
+      <summary>¿Necesito experiencia previa en el gimnasio?</summary>
+      <div class="a">No. La rutina incluye warm-up y progresión de intensidad — arrancás desde donde estés hoy, no desde donde "deberías" estar.</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿La rutina requiere gimnasio equipado?</summary>
+      <div class="a">Sí, está pensada para máquinas y equipamiento estándar de gimnasio. Si no tenés acceso a uno, escribime antes de comprar y te oriento.</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿Qué pasa si fallo un día?</summary>
+      <div class="a">Reiniciás desde el Día 1. No es un castigo — es lo que separa un reto real de una lista de buenas intenciones.</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿Cómo recibo el material?</summary>
+      <div class="a">Por mail, en PDF, automáticamente apenas se confirma tu pago con Mercado Pago. No hace falta esperar ninguna respuesta manual.</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿Cuánto dura mi acceso a los módulos?</summary>
+      <div class="a">Para siempre. Una vez que los descargás, son tuyos — podés repetir el reto las veces que quieras.</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿Qué pasa después de los 21 días?</summary>
+      <div class="a">Seguís 30 días más adentro de la comunidad.</div>
+    </details>
+  </div>
+
+  <div class="reveal">
+    <div class="eyebrow">Lo que recibís</div>
+    <h2 style="margin-bottom:10px">Stack completo del reto</h2>
+    <p style="text-align:center; font-size:12.5px; color:var(--muted); max-width:380px; margin:0 auto 20px; line-height:1.55;">Lo armé pensando en lo que a mí me faltó cuando empecé: no información suelta, sino todo junto y en orden.</p>
+  </div>
+  <div class="glass offer-panel reveal">
+    <div class="offer-row"><span class="num">01</span><div style="flex:1"><div class="name">21 módulos del reto</div><div class="desc">Cómo sostener hábitos que te hagan sentir vivo otra vez — para convertirte en la persona que admirás y respetás, no en otra versión que abandona a la semana.</div></div><span class="val">$49.900</span></div>
+    <div class="offer-row"><span class="num">02</span><div style="flex:1"><div class="name">Rutina de entrenamiento PPL</div><div class="desc">Push/Pull/Legs con criterio real, no "lo que salga ese día". Es para sentirte mejor con vos mismo, rendir más en tu día a día y reforzar un cuerpo que aguante lo que le pidas.</div></div><span class="val">$24.900</span></div>
+    <div class="offer-row"><span class="num">03</span><div style="flex:1"><div class="name">Guía de macros</div><div class="desc">Tu plan de alimentación consciente, armado para tu objetivo personal — no una dieta genérica de 21 días, sino un criterio que te sirve para siempre.</div></div><span class="val">$35.100</span></div>
+    <div class="offer-row"><span class="num">🎁</span><div style="flex:1"><div class="name">Los 5 bonos regalo de arriba</div><div class="desc">Mapa de la Conciencia, sesión en vivo, checklist y comunidad.</div></div><span class="val">$76.900</span></div>
+    <div class="offer-total"><span class="l">Valor total</span><span class="v">$187.000</span></div>
+    <div class="offer-final"><span class="l">Precio hoy</span><span class="v"><span class="cur">$</span>49.900</span></div>
+    <a class="buy-btn" href="https://mpago.la/1YvUZTB" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Quiero empezar el reto →</a>
+  </div>
+
+  <div class="glass final-glass reveal">
+    <h2>Si sentís que es tu momento,<br>te espero adentro</h2>
+    <p style="font-size:12.5px; color:var(--muted); max-width:360px; margin:-6px auto 18px; line-height:1.55;">No hace falta que estés 100% listo. Hace falta que empieces — el sistema se encarga del resto.</p>
+    <a class="buy-btn" href="https://mpago.la/1YvUZTB" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Empezar hoy por $49.900 →</a>
+    <div class="note">Pago seguro con Mercado Pago · Acceso inmediato por mail</div>
+  </div>
+
+  <footer>Santi Belfiore · Ser + Hacer = Tener</footer>
+
+</div>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } }); }, {threshold:0.1});
+  revealEls.forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.nav-link').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = document.getElementById(btn.dataset.target);
+      if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+</script>
+
+</body>
+</html>

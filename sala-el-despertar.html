@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala El Despertar — Santi Belfiore</title>
+<meta name="description" content="Mentorías en vivo, comunidad y método para convertirte en la persona que admirás y respetás. Entrada de miembros fundadores.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4578414795776331');
+  fbq('track', 'PageView');
+</script>
+<style>
+  :root{
+    --bg:#0c0905; --ink:#f6eee3; --dim:#b9aa98; --line:rgba(246,238,227,.14);
+    --glass:rgba(255,244,228,.055); --gold:#f0a83d; --gold-b:#ffc766; --gold-d:#c27a14;
+    --on-gold:#1b1105;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    background-image:radial-gradient(900px 480px at 50% -160px,rgba(240,168,61,.28),transparent 70%),
+                     radial-gradient(600px 400px at 100% 40%,rgba(194,122,20,.10),transparent 70%);
+    background-repeat:no-repeat; color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.1;letter-spacing:-.02em}
+  h1{font-size:clamp(34px,9vw,52px);font-weight:800}
+  h1 em,h2 em{font-style:normal;color:var(--gold-b)}
+  h2{font-size:clamp(26px,6.6vw,36px);font-weight:700;margin-bottom:14px;text-wrap:balance}
+  h3{font-size:19px;font-weight:700;margin-bottom:6px}
+  p{color:var(--dim)}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+  section{padding:56px 0}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .top b{font-family:'Bricolage Grotesque';font-size:16px;letter-spacing:.02em}
+  .top a{font-size:13px;color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:7px 14px;border-radius:99px}
+  .badge{display:inline-block;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-gold);background:var(--gold-b);padding:5px 11px;border-radius:99px;font-weight:700}
+  .hero{padding:26px 0 56px}
+  .hero h1{margin:18px 0 16px}
+  .hero p.sub{font-size:18px;max-width:34em;margin-bottom:26px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none;color:var(--on-gold);
+    background:linear-gradient(135deg,var(--gold-b),var(--gold));padding:15px 26px;border-radius:99px;
+    box-shadow:0 8px 26px rgba(240,168,61,.34);transition:transform .2s,box-shadow .2s;border:0;cursor:pointer;font-family:inherit}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(240,168,61,.5)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+  .btn.block{width:100%}
+  .row{display:flex;flex-wrap:wrap;gap:12px}
+  .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:22px 20px;
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  ul.ticks{list-style:none;display:grid;gap:12px;margin-top:18px}
+  ul.ticks li{display:flex;gap:12px;color:var(--ink)}
+  ul.ticks li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .grid{display:grid;gap:14px;margin-top:22px}
+  .step{display:flex;gap:16px;align-items:flex-start}
+  .step .n{font-family:'Space Mono',monospace;color:var(--gold);font-size:13px;border:1px solid rgba(240,168,61,.45);border-radius:50%;width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center}
+  .build{border-style:dashed;border-color:rgba(240,168,61,.5)}
+  .plans{display:grid;gap:14px;margin-top:24px}
+  .plan{position:relative}
+  .plan .price{font-family:'Bricolage Grotesque';font-weight:800;font-size:38px;color:var(--ink);margin:6px 0 0;line-height:1}
+  .plan .price small{font-size:15px;color:var(--dim);font-weight:500}
+  .plan .per{font-family:'Space Mono',monospace;font-size:12px;color:var(--gold-b);margin:6px 0 16px}
+  .plan.best{border-color:var(--gold);box-shadow:0 0 0 1px rgba(240,168,61,.25),0 0 34px rgba(240,168,61,.22)}
+  .plan .badge{position:absolute;top:-12px;right:18px}
+  .two{display:grid;gap:14px;margin-top:22px}
+  .no h3,.yes h3{margin-bottom:12px}
+  .no ul.ticks li::before{background:#8b7f72;box-shadow:none}
+  details{border-bottom:1px solid var(--line);padding:16px 0}
+  summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::after{content:"+";color:var(--gold);font-size:20px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:10px}
+  .note{font-size:13.5px;margin-top:16px}
+  footer{padding:36px 0 60px;text-align:center;font-size:13px;color:var(--dim)}
+  footer a{color:var(--gold-b)}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (min-width:600px){.plans{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr 1fr}}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+  a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <b>Sala El Despertar</b>
+    <a href="https://sala-santi-belfiore.onrender.com/login" target="_blank" rel="noopener">Ya soy miembro</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="badge">Miembros fundadores · precio congelado</span>
+    <h1>Dejá de empezar de cero. Convertite en la persona que <em>admirás y respetás</em>.</h1>
+    <p class="sub">Mentorías en vivo cada semana, una comunidad que te sostiene y un método para que el cambio deje de depender de tu motivación.</p>
+    <div class="row">
+      <a class="btn" href="#planes" data-ev="HeroPlanes">Ver planes de fundador →</a>
+      <a class="btn ghost" data-wa="Hola Santi, quiero saber más sobre la Sala El Despertar." data-plan="consulta" href="#">Hablar con Santi</a>
+    </div>
+  </section>
+
+  <!-- IDENTIFICACIÓN -->
+  <section class="reveal">
+    <span class="eyebrow">Si te pasa esto</span>
+    <h2>Sabés que podés más. Lo que te falta es <em>sostén</em>.</h2>
+    <ul class="ticks">
+      <li>Arrancás con fuerza y a las pocas semanas volvés a lo de siempre.</li>
+      <li>Tu entorno no entiende tu visión y te frena antes de empezar.</li>
+      <li>Probaste solo, con teoría y con motivación. Nada de eso se sostuvo.</li>
+      <li>Sentís que hay una versión tuya que admirarías, pero no tenés un camino ni un mentor que la haga posible.</li>
+    </ul>
+  </section>
+
+  <!-- MÉTODO -->
+  <section class="reveal">
+    <span class="eyebrow">El método</span>
+    <h2>Del autoconocimiento a una identidad nueva, en <em>4 etapas</em>.</h2>
+    <div class="grid">
+      <div class="glass step"><div class="n">01</div><div><h3>Conciencia</h3><p>Ves tu punto de partida real, sin negación ni excusas.</p></div></div>
+      <div class="glass step"><div class="n">02</div><div><h3>Compromiso</h3><p>Definís un plan concreto, con métricas simples y alcanzables.</p></div></div>
+      <div class="glass step"><div class="n">03</div><div><h3>Acción sostenida</h3><p>Ejecutás con acompañamiento semanal y ajustás en el camino.</p></div></div>
+      <div class="glass step"><div class="n">04</div><div><h3>Transformación estable</h3><p>El cambio deja de depender de la motivación puntual y pasa a ser parte de quién sos.</p></div></div>
+    </div>
+  </section>
+
+  <!-- QUÉ INCLUYE -->
+  <section class="reveal">
+    <span class="eyebrow">Qué incluye hoy</span>
+    <h2>Lo que recibís al <em>entrar</em>.</h2>
+    <div class="grid">
+      <div class="glass"><h3>Mentoría grupal en vivo, cada semana</h3><p>Sesiones con Santi para trabajar tu proceso, resolver dudas en vivo y ajustar tu plan.</p></div>
+      <div class="glass"><h3>Comunidad privada</h3><p>Personas comprometidas con su cambio. Cambiás tu entorno y dejás de sostener todo vos solo.</p></div>
+      <div class="glass"><h3>Hábitos y mentalidad</h3><p>Mapa de niveles de consciencia y herramientas prácticas de aplicación diaria para pasar de reaccionar a elegir.</p></div>
+      <div class="glass"><h3>Protocolos de Santi</h3><p>Nutrición y entrenamiento, más un protocolo para dejar los vicios que te frenan.</p></div>
+      <div class="glass build"><span class="eyebrow" style="margin-bottom:6px">En construcción · la armamos con vos</span><h3>Biblioteca de clases</h3><p>Los módulos grabados se están armando ahora. Los miembros fundadores los reciben apenas están y ayudan a moldearlos con lo que necesitan.</p></div>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN -->
+  <section class="reveal">
+    <span class="eyebrow">Antes de entrar</span>
+    <h2>Esto es para vos si…</h2>
+    <div class="two">
+      <div class="glass yes"><h3>Es para vos</h3>
+        <ul class="ticks">
+          <li>Estás decidido a cambiar y aceptás hacer el trabajo.</li>
+          <li>Querés estructura, seguimiento y una comunidad que empuje.</li>
+          <li>Preferís avanzar a tener razón.</li>
+        </ul></div>
+      <div class="glass no"><h3>No es para vos</h3>
+        <ul class="ticks">
+          <li>Buscás una fórmula mágica o resultados sin esfuerzo.</li>
+          <li>Querés que otro haga el cambio por vos.</li>
+          <li>Solo querés curiosear sin comprometerte.</li>
+        </ul></div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes" class="reveal">
+    <span class="eyebrow">Entrada de miembros fundadores</span>
+    <h2>Elegí tu plan. <em>El precio de fundador se congela.</em></h2>
+    <p>Quienes entran ahora mantienen este precio mientras sigan siendo miembros. Más adelante, el precio para nuevos ingresos va a subir.</p>
+    <div class="plans">
+      <div class="glass plan">
+        <h3>Mensual</h3>
+        <div class="price">$150 <small>USD</small></div>
+        <div class="per">por mes</div>
+        <a class="btn block" data-wa="Hola Santi, quiero entrar a la Sala El Despertar con el plan MENSUAL de fundador (USD 150)." data-plan="mensual" href="#">Quiero este plan</a>
+      </div>
+      <div class="glass plan">
+        <h3>Trimestral</h3>
+        <div class="price">$375 <small>USD</small></div>
+        <div class="per">$125 por mes · ahorrás $75</div>
+        <a class="btn block" data-wa="Hola Santi, quiero entrar a la Sala El Despertar con el plan TRIMESTRAL de fundador (USD 375)." data-plan="trimestral" href="#">Quiero este plan</a>
+      </div>
+      <div class="glass plan">
+        <h3>6 meses</h3>
+        <div class="price">$650 <small>USD</small></div>
+        <div class="per">≈ $108 por mes · ahorrás $250</div>
+        <a class="btn block" data-wa="Hola Santi, quiero entrar a la Sala El Despertar con el plan de 6 MESES de fundador (USD 650)." data-plan="semestral" href="#">Quiero este plan</a>
+      </div>
+      <div class="glass plan best">
+        <span class="badge">Mejor valor</span>
+        <h3>Anual</h3>
+        <div class="price">$900 <small>USD</small></div>
+        <div class="per">$75 por mes · ahorrás $900</div>
+        <a class="btn block" data-wa="Hola Santi, quiero entrar a la Sala El Despertar con el plan ANUAL de fundador (USD 900)." data-plan="anual" href="#">Quiero este plan</a>
+      </div>
+    </div>
+    <p class="note">Al tocar el botón se abre WhatsApp con tu plan ya elegido. Coordinamos tu ingreso por ahí, sin vueltas.</p>
+  </section>
+
+  <!-- VIP -->
+  <section class="reveal">
+    <div class="glass" style="border-color:rgba(240,168,61,.5)">
+      <span class="eyebrow">Cupos muy limitados · por aplicación</span>
+      <h2 style="font-size:clamp(24px,6vw,30px)">Coaching VIP 1 a 1</h2>
+      <p>Todo lo de la Sala, más seguimiento personalizado con Santi, un plan a tu medida y comunicación directa. Se aprueba cada postulación para asegurar que sea un buen match.</p>
+      <div style="margin-top:18px"><a class="btn ghost" data-wa="Hola Santi, quiero aplicar al Coaching VIP 1 a 1." data-plan="vip" href="#">Quiero aplicar →</a></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="reveal">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2>Lo que más te preguntás.</h2>
+    <details><summary>¿Cómo entro?</summary><p>Elegís tu plan, se abre WhatsApp con tu mensaje listo y coordinamos tu ingreso con Santi. Te damos acceso a la comunidad y a la plataforma de miembros.</p></details>
+    <details><summary>¿Las clases grabadas ya están?</summary><p>Todavía no: se están armando. Hoy el centro de la Sala es la mentoría en vivo y la comunidad. Los fundadores reciben los módulos a medida que se publican y participan de cómo se construyen.</p></details>
+    <details><summary>¿Necesito experiencia previa?</summary><p>No. Empezás desde donde estás hoy. Si querés medir ese punto de partida, podés hacer primero el <a href="test.html" style="color:var(--gold-b)">test gratis</a>.</p></details>
+    <details><summary>¿Y si todavía no estoy listo para la Sala?</summary><p>Empezá por el <a href="reto-21-dias.html" style="color:var(--gold-b)">Reto de 21 días</a>: es el paso más liviano para instalar disciplina antes de entrar a un espacio de mentoría continua.</p></details>
+    <details><summary>¿Qué significa "precio congelado"?</summary><p>Que mientras te mantengas como miembro, tu plan conserva el valor de fundador aunque el precio para nuevos ingresos suba.</p></details>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="reveal" style="text-align:center">
+    <h2>No salís igual a como entrás.</h2>
+    <p style="max-width:32em;margin:0 auto 24px">Entrá solo si estás decidido a transformarte en la persona que admirás y respetás. Yo te doy el mapa; el camino lo caminás vos.</p>
+    <a class="btn" href="#planes" data-ev="CierrePlanes">Elegir mi plan de fundador →</a>
+  </section>
+
+  <footer>
+    <p>© Santi Belfiore · Sala El Despertar</p>
+    <p style="margin-top:8px"><a href="/">Volver al inicio</a> · <a href="https://sala-santi-belfiore.onrender.com/login" target="_blank" rel="noopener">Acceso miembros</a></p>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var WA='5491159436724';
+    // Links de WhatsApp con mensaje armado + evento Meta
+    document.querySelectorAll('[data-wa]').forEach(function(a){
+      a.href='https://wa.me/'+WA+'?text='+encodeURIComponent(a.getAttribute('data-wa'));
+      a.target='_blank'; a.rel='noopener';
+      a.addEventListener('click',function(){
+        if(typeof fbq!=='undefined'){
+          fbq('track','Contact');
+          fbq('trackCustom','SalaPlan',{plan:a.getAttribute('data-plan')});
+        }
+      });
+    });
+    document.querySelectorAll('[data-ev]').forEach(function(a){
+      a.addEventListener('click',function(){ if(typeof fbq!=='undefined'){fbq('trackCustom','Sala'+a.getAttribute('data-ev'));} });
+    });
+    // Aparición suave al scrollear
+    var els=document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+      els.forEach(function(el){io.observe(el)});
+    } else { els.forEach(function(el){el.classList.add('in')}); }
+  })();
+</script>
+</body>
+</html>

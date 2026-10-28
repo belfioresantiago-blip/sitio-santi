@@ -112,7 +112,7 @@ p { margin: 0 0 14px; }
     Sala Despertar
   </header>
   <main id="app" class="card"></main>
-  <p class="foot">Basado en el mapa de niveles de consciencia del Dr. David R. Hawkins. Es una herramienta de autoconocimiento, no un diagnóstico ni una medición científica. Tus respuestas se procesan en tu pantalla y solo se comparten si vos enviás tu resultado.</p>
+  <p class="foot">Basado en el mapa de niveles de consciencia del Dr. David R. Hawkins. Es una herramienta de autoconocimiento, no un diagnóstico ni una medición científica. Guardamos tu nombre, tu contacto y tu resultado para acompañarte en tu próximo paso.</p>
 </div>
 <div id="bar" hidden>
   <span>Contale tu meta a Santi</span>
@@ -209,6 +209,7 @@ p { margin: 0 0 14px; }
   var steps = [{ t: "name" }];
   Q.forEach(function (_, i) { steps.push({ t: "q", i: i }); });
   SEG.forEach(function (_, i) { steps.push({ t: "seg", i: i }); });
+  steps.push({ t: "lead" });
 
   var cur = -1, name = "", order = [], qa = [], sa = [], result = null;
 
@@ -235,6 +236,7 @@ p { margin: 0 0 14px; }
     var s = steps[cur];
     if (s.t === "name") return renderName();
     if (s.t === "q") return renderQ(s.i);
+    if (s.t === "lead") return renderLead();
     return renderSeg(s.i);
   }
 
@@ -323,6 +325,44 @@ p { margin: 0 0 14px; }
     bindBack();
   }
 
+  var leadSent = false;
+  function renderLead() {
+    var r = compute();
+    app.innerHTML =
+      '<div class="screen">' +
+      '<p class="eyebrow amb">Último paso</p>' +
+      "<h2>Tu resultado está listo, " + name.replace(/</g, "&lt;") + ".</h2>" +
+      '<p class="lead">¿Dónde te lo dejamos? Te mandamos tu consigna de la semana y Santi puede escribirte para acompañarte en tu próximo paso.</p>' +
+      '<form id="lf" novalidate>' +
+      '<div class="field"><label for="wa">Tu WhatsApp (con código de área)</label><input id="wa" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" placeholder="Ej: 11 5555 5555"></div>' +
+      '<div class="field"><label for="em">Tu mail (opcional)</label><input id="em" type="email" autocomplete="email" maxlength="80" placeholder="tu@mail.com"></div>' +
+      '<div class="field" style="position:absolute;left:-9999px" aria-hidden="true"><label>Empresa</label><input id="emp" tabindex="-1" autocomplete="off"></div>' +
+      '<p class="small" id="lerr" role="alert" style="color:var(--amber);min-height:1.2em"></p>' +
+      '<button type="submit" class="btn block">Ver mi resultado →</button></form>' +
+      '<p class="small" style="margin-top:12px">Solo lo usamos para enviarte tu resultado y propuestas de Santi. No hacemos spam y podés pedir que te saquemos cuando quieras.</p>' +
+      backLink() + "</div>";
+    document.getElementById("wa").focus({ preventScroll: true });
+    document.getElementById("lf").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var wa = document.getElementById("wa").value.replace(/[^\d+]/g, "");
+      var em = document.getElementById("em").value.trim();
+      var err = document.getElementById("lerr");
+      var emOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+      if (wa.length < 8 && !emOk) { err.textContent = "Dejanos un WhatsApp válido o un mail para mostrarte tu resultado."; return; }
+      if (em && !emOk) { err.textContent = "Revisá el mail: parece incompleto."; return; }
+      if (!leadSent) {
+        leadSent = true;
+        try {
+          fetch("/api/lead", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre: name, whatsapp: wa, email: em, estado: r.st.t[1], empresa: document.getElementById("emp").value }) }).catch(function () {});
+        } catch (x) {}
+        if (typeof fbq !== "undefined") { fbq("track", "Lead"); }
+      }
+      go(cur + 1);
+    });
+    bindBack();
+  }
+
   function compute() {
     var sum = qa.reduce(function (a, b) { return a + b; }, 0);
     var mean = sum / qa.length;
@@ -351,6 +391,16 @@ p { margin: 0 0 14px; }
       : CONFIG.instagram;
   }
 
+  function nextStep(r) {
+    if (r.mean < 200) {
+      return "<p><b>Estás por debajo de la línea de 200.</b> Más que otra teoría, lo que te mueve ahora es estructura y una racha de acción: 21 días de hábitos no negociables, con plan diario y seguimiento.</p>" +
+        '<a class="btn block" href="reto-21-dias.html" onclick="if(typeof fbq!==\'undefined\'){fbq(\'trackCustom\',\'TestAReto\');}">Empezar el Reto de 21 días →</a>';
+    }
+    return "<p><b>Ya cruzaste la línea de 200.</b> Lo que sigue no es más motivación, es sostén: mentorías en vivo cada semana y una comunidad que te empuja a seguir subiendo.</p>" +
+      '<a class="btn block" href="sala-el-despertar.html" onclick="if(typeof fbq!==\'undefined\'){fbq(\'trackCustom\',\'TestASala\');}">Conocer la Sala El Despertar →</a>' +
+      '<p class="small" style="margin:12px 0 0">¿Preferís empezar más liviano? <a href="reto-21-dias.html" style="color:var(--amber)">Mirá el Reto de 21 días</a>.</p>';
+  }
+
   function showResult() {
     result = compute();
     if (typeof fbq !== "undefined") { fbq("trackCustom", "TestCompletado"); }
@@ -375,6 +425,7 @@ p { margin: 0 0 14px; }
       '<div class="compass" role="img" aria-label="' + r.fuerza + " respuestas desde la fuerza y " + r.poder + ' desde el poder"><b class="f" style="width:' + (r.fuerza / 8 * 100) + '%"></b><b class="p" style="width:' + (r.poder / 8 * 100) + '%"></b></div>' +
       '<div class="ends"><span>' + r.fuerza + " de 8 desde la Fuerza</span><span>" + r.poder + " desde el Poder</span></div></div>" +
       '<p class="quote">Esto no es quién sos. Es desde dónde estás operando hoy, y el estado se mueve.</p>' +
+      '<div class="box hl"><h3>Tu siguiente paso</h3>' + nextStep(r) + "</div>" +
       '<div class="box"><h3>Tu consigna de la semana</h3><p>' + r.st.c + "</p></div>" +
       '<div class="box hl"><h3>Tu primera declaración</h3>' +
       "<p>Las metas que se quedan en la cabeza se negocian solas. Las que se dicen en voz alta pesan distinto. Escribí tu meta de esta semana y mandásela a Santi junto con tu resultado.</p>" +

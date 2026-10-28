@@ -1,0 +1,412 @@
+<!doctype html><html lang="es"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4578414795776331');
+  fbq('track', 'PageView');
+</script></head><body>
+<title>Test de Consciencia Sala Despertar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap">
+<style>
+/* Layout: una columna de 560px. Recorrido: inicio, nombre, 8 situaciones, 5 preguntas "sobre vos", resultado con mapa de 15 niveles, brújula y barra fija de contacto. Look oscuro con brillo ámbar, igual que el link-in-bio de la Sala. */
+:root {
+  color-scheme: dark;
+  --bg: #0d0a07;
+  --ink: #f5ede2;
+  --muted: #b8a999;
+  --line: rgba(245, 237, 226, 0.16);
+  --glass: rgba(255, 244, 228, 0.06);
+  --amber: #f2a43a;
+  --amber-deep: #c97a14;
+  --on-amber: #1a1005;
+  --font: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(900px 420px at 50% -140px, rgba(242, 164, 58, 0.30), transparent 70%),
+    radial-gradient(560px 320px at 100% 100%, rgba(201, 122, 20, 0.16), transparent 70%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-block: 30px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body.hasbar { padding-bottom: 120px; }
+.topbar { position: fixed; left: 0; right: 0; top: 0; height: 3px; background: var(--line); z-index: 20; }
+.topbar i { display: block; height: 100%; width: 0; background: var(--amber); transition: width 0.4s ease; }
+.wrap { max-width: 560px; margin: 0 auto; }
+.brand { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--amber); font-weight: 700; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 22px; }
+.card { border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-radius: 24px; padding: 28px 22px; }
+.screen { animation: rise 0.4s ease both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; border: 1px solid rgba(242, 164, 58, 0.45); color: var(--amber); border-radius: 999px; padding: 4px 12px; margin: 0 6px 6px 0; }
+h1 { font-size: clamp(27px, 7.4vw, 40px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; text-transform: uppercase; margin: 14px 0 14px; text-wrap: balance; }
+h1 em, .state em { font-style: normal; color: var(--amber); }
+h2 { font-size: clamp(20px, 5.4vw, 25px); line-height: 1.28; letter-spacing: -0.01em; font-weight: 600; margin: 14px 0 18px; text-wrap: balance; outline: none; }
+h3 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); font-weight: 700; margin: 0 0 8px; }
+p { margin: 0 0 14px; }
+.lead { color: var(--muted); max-width: 46ch; }
+.small { color: var(--muted); font-size: 13.5px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.eyebrow.amb { color: var(--amber); font-weight: 700; }
+.btn { appearance: none; border: 0; font: inherit; font-weight: 700; cursor: pointer; border-radius: 999px; padding: 15px 24px; background: linear-gradient(180deg, var(--amber), var(--amber-deep)); color: var(--on-amber); box-shadow: 0 8px 30px rgba(242, 164, 58, 0.28); text-decoration: none; display: inline-block; text-align: center; text-transform: uppercase; letter-spacing: 0.04em; font-size: 14px; }
+.btn.block { width: 100%; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.btn.slim { padding: 10px 18px; font-size: 12.5px; }
+.btn:focus-visible, .opt:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, .link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.opts { display: grid; gap: 10px; }
+.opt { appearance: none; width: 100%; text-align: left; font: inherit; font-size: 15.5px; color: var(--ink); background: var(--glass); border: 1px solid var(--line); border-radius: 16px; padding: 15px 18px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.opt:hover { border-color: rgba(242, 164, 58, 0.6); }
+.opt.sel { border-color: var(--amber); background: rgba(242, 164, 58, 0.16); }
+.nav { margin-top: 18px; text-align: center; }
+.link { appearance: none; background: none; border: 0; font: inherit; font-size: 14px; color: var(--muted); cursor: pointer; padding: 6px 10px; text-decoration: underline; text-underline-offset: 3px; }
+.field { display: grid; gap: 6px; margin: 0 0 16px; }
+.field label { font-size: 13px; color: var(--muted); }
+.field input, .field textarea { font: inherit; font-size: 16px; color: var(--ink); background: rgba(0, 0, 0, 0.35); border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; width: 100%; resize: vertical; }
+.state { font-size: clamp(40px, 12vw, 62px); line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; text-transform: uppercase; margin: 8px 0 16px; text-wrap: balance; }
+.panel { border: 1px solid var(--line); background: rgba(0, 0, 0, 0.22); border-radius: 20px; padding: 18px 16px; margin: 22px 0 0; }
+.map { list-style: none; padding: 0; margin: 10px 0 12px; display: grid; gap: 4px; }
+.map li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border-radius: 12px; border: 1px solid transparent; color: var(--muted); font-size: 15px; }
+.map li .v { font-variant-numeric: tabular-nums; font-size: 13px; }
+.map li.zone { color: var(--ink); font-weight: 700; background: rgba(242, 164, 58, 0.08); border-color: rgba(242, 164, 58, 0.55); }
+.map li .tag { background: var(--amber); color: var(--on-amber); font-size: 10.5px; letter-spacing: 0.1em; font-weight: 800; border-radius: 999px; padding: 3px 9px; margin-left: 8px; }
+.map li .nm { min-width: 0; }
+.map li.cut { color: var(--amber); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; padding: 2px 0; justify-content: center; gap: 12px; }
+.map li.cut::before, .map li.cut::after { content: ""; height: 1px; background: var(--amber); opacity: 0.5; flex: 1; }
+.compass { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--line); margin: 6px 0; }
+.compass b { display: block; height: 100%; }
+.compass .f { background: #6f6a66; }
+.compass .p { background: var(--amber); }
+.ends { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
+.quote { border-left: 3px solid var(--amber); padding: 2px 0 2px 14px; margin: 20px 0; font-style: italic; color: var(--ink); }
+.box { border: 1px solid var(--line); background: var(--glass); border-radius: 18px; padding: 18px 16px; margin: 0 0 14px; }
+.box.hl { border-color: rgba(242, 164, 58, 0.55); }
+.box p:last-child { margin-bottom: 0; }
+.fallback { width: 100%; margin-top: 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.foot { color: var(--muted); font-size: 12.5px; margin: 18px 6px 0; max-width: 56ch; }
+#bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgba(13, 10, 7, 0.94); border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#bar span { font-size: 14px; min-width: 0; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="topbar" aria-hidden="true"><i id="prog"></i></div>
+<div class="wrap">
+  <header class="brand">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 20a9 9 0 0 1 18 0"/><path d="M2 24h24"/><path d="M14 5v3M5.5 9.5l2 2M22.5 9.5l-2 2"/></svg>
+    Sala Despertar
+  </header>
+  <main id="app" class="card"></main>
+  <p class="foot">Basado en el mapa de niveles de consciencia del Dr. David R. Hawkins. Es una herramienta de autoconocimiento, no un diagnóstico ni una medición científica. Tus respuestas se procesan en tu pantalla y solo se comparten si vos enviás tu resultado.</p>
+</div>
+<div id="bar" hidden>
+  <span>Contale tu meta a Santi</span>
+  <a class="btn slim" id="barlink" target="_blank" rel="noopener" href="#">Enviar mi resultado</a>
+</div>
+
+<script>
+(function () {
+  var CONFIG = {
+    whatsapp: "5491159436724", // número con código de país y sin signos, por ejemplo 5491112345678
+    instagram: "https://instagram.com/santibelfiore"
+  };
+
+  // Mapa de niveles (valor de Hawkins) de arriba hacia abajo.
+  var MAP = [[600, "Paz"], [540, "Alegría"], [500, "Amor"], [400, "Razón"], [350, "Aceptación"], [310, "Voluntad"], [250, "Neutralidad"], [200, "Coraje"], [175, "Orgullo"], [150, "Ira"], [125, "Deseo"], [100, "Miedo"], [50, "Apatía"], [30, "Culpa"], [20, "Vergüenza"]];
+
+  // Cada situación tiene 5 respuestas y cada respuesta lleva el valor del nivel desde el que se responde.
+  var Q = [
+    { q: "Te llega un gasto fuerte que no esperabas. ¿Qué es lo PRIMERO que pasa dentro tuyo?", o: [
+      ["Respiro, miro los números de frente y decido qué toca recortar o generar.", 310],
+      ["Lo tomo como un dato, no como una sentencia: ajusto el plan y sigo.", 350],
+      ["Se me cierra el pecho: «siempre me pasa a mí». Tardo días en reaccionar.", 50],
+      ["Bronca. Me pongo a hacer mil cosas a la vez para taparlo como sea.", 150],
+      ["Lo resuelvo en silencio. Nadie cerca se entera de que me tembló el piso.", 175]] },
+    { q: "Tenés que decirle tu precio a un cliente, o pedir un aumento. En ese momento vos…", o: [
+      ["Lo digo tranquilo. Sé lo que vale mi trabajo; si no es para esa persona, está bien.", 350],
+      ["Lo bajo antes de que digan nada. Cobrar me da culpa.", 30],
+      ["Me tiembla la voz, pero digo mi precio y aguanto el silencio.", 200],
+      ["Lo digo a la defensiva, justificándome, listo para pelear.", 150],
+      ["Tiro un número alto para no verme chico, aunque por dentro dudo.", 175]] },
+    { q: "Ves a alguien de tu edad viviendo la vida que vos querés. ¿Qué sentís?", o: [
+      ["Me alegro de verdad. Su resultado no me quita nada: me muestra que hay camino.", 350],
+      ["Confirmación de que llegué tarde. «Eso ya no es para mí.»", 50],
+      ["Envidia que duele, y esa semana me exijo el doble.", 125],
+      ["Me pica, lo admito, y lo uso como prueba de que se puede.", 200],
+      ["«Seguro lo tiene fácil, o algo esconde.» Le resto mérito para no sentirme menos.", 175]] },
+    { q: "Lo último que intentaste en tu proyecto o trabajo no funcionó. ¿Qué te dijiste?", o: [
+      ["«No sirvo para esto.» Y lo dejé un buen tiempo.", 20],
+      ["Hacia afuera dije «todo bien, estoy pivoteando». Hacia adentro no quise volver a mirarlo.", 175],
+      ["«El mercado está imposible, la gente no valora.» Me quemé empujando lo mismo, más fuerte.", 150],
+      ["Me dolió, lo miré de frente y busqué QUÉ exactamente falló.", 250],
+      ["«Dato, no drama.» Cambié una variable y probé de nuevo en chiquito.", 350]] },
+    { q: "Hay una decisión importante que venís aplazando. ¿Por qué sigue ahí?", o: [
+      ["Ya la estoy tomando: me puse fecha y estoy juntando lo que necesito.", 200],
+      ["Porque me da terror equivocarme. Prefiero no moverme.", 100],
+      ["Porque si me equivoco, ¿qué dirían los que me ven como «el que sabe»?", 175],
+      ["Porque no tengo tiempo ni para respirar: vivo apagando incendios.", 125],
+      ["No dejo para después las importantes: las decido con calma y corrijo en el camino.", 310]] },
+    { q: "Estás trabado en algo importante. ¿Pedís ayuda?", o: [
+      ["Por supuesto. Rodearme de gente que ya lo vivió es parte de mi método.", 310],
+      ["Me cuesta muchísimo: pedir ayuda es admitir que no puedo. Casi nunca lo hago.", 100],
+      ["Sí, aunque me cueste el orgullo. Prefiero avanzar a tener razón.", 200],
+      ["¿Ayuda de quién? Nadie lo hace como yo. Lo empujo solo.", 175],
+      ["No quiero molestar. Los demás tienen sus propios problemas.", 30]] },
+    { q: "¿Cómo terminás la MAYORÍA de tus días?", o: [
+      ["Con energía. Hago menos cosas que antes, pero las que mueven la aguja.", 310],
+      ["Cansado y satisfecho: hoy hice algo que me acercó, aunque fuera incómodo.", 200],
+      ["Cumplí con todo lo que se espera de mí, pero hay un vacío que no le cuento a nadie.", 175],
+      ["Agotado y con la sensación de que no hice lo suficiente. Otra vez.", 30],
+      ["Reventado de hacer, sin avanzar en lo que de verdad importa.", 125]] },
+    { q: "Pensá en tu vida dentro de 5 años si TODO sigue igual que hoy. ¿Qué sentís?", o: [
+      ["«Voy a estar bien»… aunque sé que «bien» no es a lo que vine.", 175],
+      ["Miedo. No quiero ni imaginarlo.", 100],
+      ["Inquietud sana: por eso estoy acá, para que NO siga igual.", 200],
+      ["Bronca: tanto esfuerzo no puede ser para quedarme acá.", 150],
+      ["Paz: estoy construyendo esa vida. Esto es un peldaño más del camino.", 350]] }
+  ];
+
+  var SEG = [
+    { k: "Me dedico a", q: "¿A qué te dedicás hoy?", o: ["Coach / mentor / terapeuta / formador", "Dueño/a de negocio o marca", "Consultor/a o profesional independiente", "Creador/a de contenido", "Empleado/a construyendo mi proyecto", "Otro"] },
+    { k: "Facturación mensual", q: "¿En qué rango factura tu negocio o proyecto al mes?", sub: "En dólares estadounidenses (USD).", o: ["Aún no vendo", "Menos de USD 2.000", "USD 2.000 – 10.000", "USD 10.000 – 50.000", "Más de USD 50.000"] },
+    { k: "Equipo", q: "¿Quién trabaja con vos hoy?", o: ["Solo yo", "1–2 personas (freelance o apoyo)", "Equipo de 3 a 10", "Más de 10"] },
+    { k: "Conozco a Santi hace", q: "¿Hace cuánto conocés a Santi?", o: ["Lo conocí hoy o hace pocos días", "Menos de 6 meses", "Entre 6 meses y 1 año", "Entre 1 y 3 años", "Más de 3 años"] },
+    { k: "Experiencia previa", q: "¿Participaste antes en algo de Santi?", o: ["Es la primera vez", "Solo vi su contenido", "Estuve en una clase o evento", "Fui parte de un programa"] }
+  ];
+
+  // Cada estado dominante se elige según el promedio de los 8 valores (límite superior exclusivo).
+  var STATES = [
+    { max: 80, t: ["LA ", "APATÍA"], d: "Hoy estás operando desde la apatía: todo cuesta, nada parece valer el esfuerzo y la energía no alcanza. Muchas veces es agotamiento acumulado más que falta de ganas. Tu siguiente paso es un movimiento chico y buena compañía, no una gran decisión.", c: "Caminá diez minutos y contale a alguien de confianza cómo estás de verdad." },
+    { max: 112, t: ["EL ", "MIEDO"], d: "Hoy estás operando desde el miedo: postergás, evitás, pedís permiso y gastás mucha energía en protegerte. Te mantiene a salvo y te mantiene igual. Tu siguiente paso es acercarte al miedo de a poco, con acciones que puedas sostener.", c: "Nombrá tu miedo en una frase y hacé hoy una acción de cinco minutos que lo desafíe." },
+    { max: 137, t: ["EL ", "DESEO"], d: "Hoy estás operando desde el deseo: querés más, perseguís, acumulás, y cada meta cumplida te sabe a poco. Hay motor, pero no hay descanso. Tu siguiente paso es distinguir lo que querés de lo que sentís que necesitás demostrar.", c: "Elegí algo que ya conseguiste y preguntate qué esperabas sentir cuando lo lograras." },
+    { max: 162, t: ["LA ", "IRA"], d: "Hoy estás operando desde la ira: hay energía y filo, pero se gasta en pelear, justificarte o empujar más fuerte lo mismo. Es fuerza, no poder. Tu siguiente paso es usar esa energía para decidir en lugar de reaccionar.", c: "Antes de responder algo que te enoje, esperá una hora y escribí qué querés conseguir de verdad." },
+    { max: 188, t: ["EL ", "ORGULLO"], d: "Hoy estás operando desde el orgullo: sostenés una imagen, resolvés solo y te cuesta mostrarte vulnerable. Da resultados y cansa. Estás a un paso de la línea. Tu siguiente paso es soltar la imagen de quien todo lo puede.", c: "Pedí ayuda en algo concreto esta semana y observá qué sentís al hacerlo." },
+    { max: 280, t: ["EL ", "CORAJE"], d: "Hoy estás operando desde el coraje: cruzaste la línea de los 200. Hacés lo que corresponde aunque tengas miedo y no esperás a que todo esté claro para moverte. Lo que sigue no es más valentía sino sostén: un sistema que haga que avanzar no dependa de cómo te levantaste hoy.", c: "Fijate en qué áreas actuás sin que nadie te mire y en cuáles todavía necesitás compañía para animarte." },
+    { max: 330, t: ["LA ", "VOLUNTAD"], d: "Hoy estás operando desde la voluntad: te comprometés, sostenés lo que decidís y te adaptás cuando algo sale distinto. Ya no peleás con la realidad, trabajás con ella. Tu siguiente paso es que lo que hacés también sea fuente de disfrute, no solo de cumplimiento.", c: "Elegí una tarea que hacés por deber y buscale el sentido que la volvería una elección." },
+    { max: 1000, t: ["LA ", "ACEPTACIÓN"], d: "Hoy estás operando desde la aceptación o más arriba: tomás lo que pasa como información y no como amenaza, y tu energía queda libre para crear y servir. Tu desafío ahora es cuidar ese estado con ritmo, silencio y práctica, y ponerlo al servicio de otros.", c: "Compartí con alguien algo que aprendiste esta semana: enseñar afianza el estado." }
+  ];
+
+  var app = document.getElementById("app");
+  var prog = document.getElementById("prog");
+  var bar = document.getElementById("bar");
+  var barlink = document.getElementById("barlink");
+
+  var steps = [{ t: "name" }];
+  Q.forEach(function (_, i) { steps.push({ t: "q", i: i }); });
+  SEG.forEach(function (_, i) { steps.push({ t: "seg", i: i }); });
+
+  var cur = -1, name = "", order = [], qa = [], sa = [], result = null;
+
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function setProgress() {
+    prog.style.width = (cur < 0 ? 0 : (cur + 1) / (steps.length + 1) * 100) + "%";
+  }
+
+  function go(n) {
+    cur = n;
+    bar.hidden = true;
+    document.body.classList.remove("hasbar");
+    setProgress();
+    if (cur < 0) return intro();
+    if (cur >= steps.length) return showResult();
+    var s = steps[cur];
+    if (s.t === "name") return renderName();
+    if (s.t === "q") return renderQ(s.i);
+    return renderSeg(s.i);
+  }
+
+  function back() { go(cur - 1); window.scrollTo(0, 0); }
+  function backLink() { return '<div class="nav"><button type="button" class="link" id="back">← Volver</button></div>'; }
+  function bindBack() { var b = document.getElementById("back"); if (b) b.addEventListener("click", back); }
+
+  function intro() {
+    app.innerHTML =
+      '<div class="screen">' +
+      '<span class="pill">Sala Despertar</span><span class="pill">Test de consciencia</span>' +
+      '<p class="eyebrow amb" style="margin-top:10px">Antes de empezar</p>' +
+      "<h1>¿Desde dónde estás operando: <em>fuerza o poder</em>?</h1>" +
+      '<p class="lead">Sacá una foto honesta de tu punto de partida. 8 situaciones reales, unos 3 minutos. Al final vas a ver algo que muy poca gente ve de sí misma.</p>' +
+      '<p class="small">No hay respuestas correctas. Respondé lo que DE VERDAD pasa dentro tuyo, no lo que te gustaría que pasara.</p>' +
+      '<button type="button" class="btn block" id="go" style="margin-top:8px">Medir mi nivel de consciencia →</button>' +
+      "</div>";
+    document.getElementById("go").addEventListener("click", function () {
+      order = Q.map(function (q) { return shuffle(q.o); });
+      qa = new Array(Q.length).fill(null);
+      sa = new Array(SEG.length).fill(null);
+      go(0);
+    });
+  }
+
+  function renderName() {
+    app.innerHTML =
+      '<div class="screen">' +
+      '<p class="eyebrow">Para personalizar tu resultado</p>' +
+      "<h2>¿Cómo te llamás?</h2>" +
+      '<form id="nf" novalidate><div class="field"><label for="nombre">Tu nombre</label>' +
+      '<input id="nombre" name="nombre" type="text" autocomplete="given-name" maxlength="40"></div>' +
+      '<button type="submit" class="btn block">Continuar</button></form>' +
+      '<p class="small" style="margin-top:12px">Tu nombre solo aparece en tu pantalla.</p>' +
+      backLink() + "</div>";
+    var inp = document.getElementById("nombre");
+    inp.value = name;
+    inp.focus({ preventScroll: true });
+    document.getElementById("nf").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = inp.value.trim();
+      if (!v) { inp.focus(); inp.setAttribute("aria-invalid", "true"); inp.placeholder = "Escribí tu nombre para seguir"; return; }
+      name = v;
+      go(cur + 1);
+    });
+    bindBack();
+  }
+
+  function optionsHtml(list, selected) {
+    return list.map(function (o) {
+      var txt = typeof o === "string" ? o : o[0];
+      var val = typeof o === "string" ? o : o[1];
+      return '<button type="button" class="opt' + (selected === val ? " sel" : "") + '" data-v="' + String(val).replace(/"/g, "&quot;") + '">' + txt + "</button>";
+    }).join("");
+  }
+
+  function bindOpts(onPick) {
+    Array.prototype.forEach.call(app.querySelectorAll(".opt"), function (b) {
+      b.addEventListener("click", function () {
+        Array.prototype.forEach.call(app.querySelectorAll(".opt"), function (x) { x.classList.remove("sel"); });
+        b.classList.add("sel");
+        var v = b.getAttribute("data-v");
+        setTimeout(function () { onPick(v); go(cur + 1); }, 220);
+      });
+    });
+  }
+
+  function renderQ(i) {
+    app.innerHTML =
+      '<div class="screen"><p class="eyebrow">Situación ' + (i + 1) + " de " + Q.length + "</p>" +
+      '<h2 id="qt" tabindex="-1">' + Q[i].q + "</h2>" +
+      '<div class="opts" role="group" aria-labelledby="qt">' + optionsHtml(order[i], qa[i]) + "</div>" + backLink() + "</div>";
+    document.getElementById("qt").focus({ preventScroll: true });
+    bindOpts(function (v) { qa[i] = Number(v); });
+    bindBack();
+  }
+
+  function renderSeg(i) {
+    var s = SEG[i];
+    app.innerHTML =
+      '<div class="screen"><p class="eyebrow">Sobre vos</p>' +
+      '<h2 id="qt" tabindex="-1">' + s.q + "</h2>" + (s.sub ? '<p class="lead" style="margin-top:-8px">' + s.sub + "</p>" : "") +
+      '<div class="opts" role="group" aria-labelledby="qt">' + optionsHtml(s.o, sa[i]) + "</div>" + backLink() + "</div>";
+    document.getElementById("qt").focus({ preventScroll: true });
+    bindOpts(function (v) { sa[i] = v; });
+    bindBack();
+  }
+
+  function compute() {
+    var sum = qa.reduce(function (a, b) { return a + b; }, 0);
+    var mean = sum / qa.length;
+    var st = STATES.find(function (s) { return mean < s.max; }) || STATES[STATES.length - 1];
+    var near = 0;
+    MAP.forEach(function (m, i) { if (Math.abs(m[0] - mean) < Math.abs(MAP[near][0] - mean)) near = i; });
+    var poder = qa.filter(function (v) { return v >= 200; }).length;
+    return { mean: mean, st: st, near: near, poder: poder, fuerza: qa.length - poder };
+  }
+
+  function waText(meta) {
+    var r = result;
+    var lines = [
+      "Hola Santi, soy " + name + ". Hice el test de consciencia de Sala Despertar.",
+      "Mi estado dominante hoy: " + (r.st.t[0] + r.st.t[1]).toLowerCase() + ".",
+      "Brújula: " + r.fuerza + " de 8 desde la Fuerza, " + r.poder + " desde el Poder."
+    ];
+    SEG.forEach(function (s, i) { if (sa[i]) lines.push(s.k + ": " + sa[i] + "."); });
+    lines.push("Mi meta de esta semana: " + (meta && meta.trim() ? meta.trim() : "te la cuento por acá."));
+    return lines.join("\n");
+  }
+
+  function contactHref(meta) {
+    return CONFIG.whatsapp
+      ? "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(waText(meta))
+      : CONFIG.instagram;
+  }
+
+  function showResult() {
+    result = compute();
+    if (typeof fbq !== "undefined") { fbq("trackCustom", "TestCompletado"); }
+    var r = result;
+    var rows = "";
+    MAP.forEach(function (m, i) {
+      var inZone = Math.abs(i - r.near) <= 1;
+      rows += '<li class="' + (inZone ? "zone" : "") + '"><span class="nm">' + m[1] +
+        (i === r.near ? '<span class="tag">HOY ESTÁS AQUÍ</span>' : "") + '</span><span class="v">' + m[0] + "</span></li>";
+      if (m[0] === 200) rows += '<li class="cut" aria-hidden="true">La línea · 200</li>';
+    });
+
+    app.innerHTML =
+      '<div class="screen">' +
+      '<p class="eyebrow amb">Tu punto de partida · <span id="who"></span></p>' +
+      '<p class="eyebrow" style="margin-top:6px">Tu estado dominante hoy</p>' +
+      '<p class="state">' + r.st.t[0] + "<em>" + r.st.t[1] + "</em></p>" +
+      "<p>" + r.st.d + "</p>" +
+      '<div class="panel"><h3>Tu lugar en el mapa hoy</h3><ul class="map">' + rows + "</ul>" +
+      '<p class="small" style="margin:0">Mapa de niveles de consciencia publicado por el Dr. David R. Hawkins. Se destaca la zona desde la que respondiste hoy: no es una calibración exacta ni un diagnóstico.</p></div>' +
+      '<div class="panel"><h3>Tu brújula</h3>' +
+      '<div class="compass" role="img" aria-label="' + r.fuerza + " respuestas desde la fuerza y " + r.poder + ' desde el poder"><b class="f" style="width:' + (r.fuerza / 8 * 100) + '%"></b><b class="p" style="width:' + (r.poder / 8 * 100) + '%"></b></div>' +
+      '<div class="ends"><span>' + r.fuerza + " de 8 desde la Fuerza</span><span>" + r.poder + " desde el Poder</span></div></div>" +
+      '<p class="quote">Esto no es quién sos. Es desde dónde estás operando hoy, y el estado se mueve.</p>' +
+      '<div class="box"><h3>Tu consigna de la semana</h3><p>' + r.st.c + "</p></div>" +
+      '<div class="box hl"><h3>Tu primera declaración</h3>' +
+      "<p>Las metas que se quedan en la cabeza se negocian solas. Las que se dicen en voz alta pesan distinto. Escribí tu meta de esta semana y mandásela a Santi junto con tu resultado.</p>" +
+      '<div class="field"><label for="meta">Mi meta de esta semana</label><textarea id="meta" rows="2" maxlength="200" placeholder="Esta semana voy a…"></textarea></div>' +
+      '<a class="btn block" id="declare" target="_blank" rel="noopener" href="#">Declarar mi meta →</a>' +
+      '<div class="actions"><button type="button" class="btn ghost slim" id="copy">Copiar mi resultado</button><button type="button" class="btn ghost slim" id="again">Repetir el test</button></div>' +
+      '<textarea class="fallback" id="fb" rows="4" hidden readonly aria-label="Texto para copiar"></textarea></div>' +
+      "</div>";
+
+    document.getElementById("who").textContent = name.toUpperCase();
+    var meta = document.getElementById("meta");
+    var declare = document.getElementById("declare");
+    function sync() { var h = contactHref(meta.value); declare.href = h; barlink.href = h; }
+    sync();
+    meta.addEventListener("input", sync);
+
+    document.getElementById("copy").addEventListener("click", function () {
+      var btn = this, fb = document.getElementById("fb"), text = waText(meta.value);
+      function done() { btn.textContent = "Copiado"; setTimeout(function () { btn.textContent = "Copiar mi resultado"; }, 2000); }
+      function fallback() { fb.hidden = false; fb.value = text; fb.focus(); fb.select(); }
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+    document.getElementById("again").addEventListener("click", function () { window.scrollTo(0, 0); go(-1); });
+
+    bar.hidden = false;
+    document.body.classList.add("hasbar");
+    prog.style.width = "100%";
+    window.scrollTo(0, 0);
+  }
+
+  go(-1);
+})();
+</script>
+
+</body></html>

@@ -440,6 +440,9 @@
     transition:transform .2s, box-shadow .2s;
   }
   .card.reto:hover .reto-cta{transform:translateX(3px);box-shadow:0 8px 24px rgba(240,168,61,.5);}
+
+  .test-cta{display:inline-flex;margin-top:9px;font-weight:700;font-size:12.5px;color:var(--gold-bright);border:1px solid var(--gold-soft);padding:6px 13px;border-radius:100px;}
+  .card.test:hover .test-cta{background:rgba(240,168,61,.14);}
 </style>
 <script>
   !function(f,b,e,v,n,t,s)
@@ -468,7 +471,18 @@
 
   <div class="stack">
 
-    <a href="reto-21-dias.html" class="card reto" style="--delay:.05s" onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','HubClickReto');}">
+    <a href="test.html" class="card test" style="--delay:.05s" onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','HubClickTest');}">
+      <span class="node"></span>
+      <div class="icon icon-free">🧭</div>
+      <div class="body">
+        <span class="tag free">Gratis · 3 minutos</span>
+        <h3>Test gratis: ¿fuerza o poder?</h3>
+        <p>Descubrí desde dónde estás operando hoy.</p>
+        <span class="test-cta">Hacer el test →</span>
+      </div>
+    </a>
+
+    <a href="reto-21-dias.html" class="card reto" style="--delay:.12s" onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','HubClickReto');}">
       <span class="node"></span>
       <div class="icon icon-paid">🔥</div>
       <div class="body">

@@ -92,9 +92,90 @@
   @media (min-width:600px){.plans{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr 1fr}}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
   a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  /* ===== MOTION ===== */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold-d),var(--gold-b));z-index:60;box-shadow:0 0 12px var(--gold)}
+  .orbs{position:absolute;left:0;top:0;width:100%;height:900px;overflow:hidden;pointer-events:none;z-index:0}
+  .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;will-change:transform}
+  .orb.a{width:300px;height:300px;background:radial-gradient(circle,#ffb347,transparent 70%);top:-60px;right:-90px;animation:float 9s ease-in-out infinite}
+  .orb.b{width:240px;height:240px;background:radial-gradient(circle,#c27a14,transparent 70%);top:260px;left:-110px;animation:float 11s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{translate:0 0}50%{translate:0 -26px}}
+  .rings{position:absolute;right:-70px;top:90px;z-index:0;width:300px;height:300px;pointer-events:none;opacity:.5}
+  .rings i{position:absolute;inset:0;border:1px solid rgba(240,168,61,.55);border-radius:50%;animation:ring 6s ease-out infinite}
+  .rings i:nth-child(2){animation-delay:2s}.rings i:nth-child(3){animation-delay:4s}
+  @keyframes ring{0%{transform:scale(.25);opacity:.9}100%{transform:scale(1.15);opacity:0}}
+  .wrap{position:relative;z-index:1}
+  .words .w{display:inline-block;opacity:0;transform:translateY(.6em);animation:wordIn .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*70ms + 150ms)}
+  @keyframes wordIn{to{opacity:1;transform:none}}
+  .fade{opacity:0;animation:wordIn .8s ease forwards}
+  .btn.pulse{animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 8px 26px rgba(240,168,61,.34)}50%{box-shadow:0 8px 40px rgba(240,168,61,.62)}}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}
+  .stat{text-align:center;padding:16px 8px}
+  .stat b{display:block;font-family:'Bricolage Grotesque';font-size:clamp(28px,8vw,38px);color:var(--gold-b);line-height:1}
+  .stat span{display:block;font-size:12px;color:var(--dim);margin-top:6px;line-height:1.3}
+
+  /* spotlight en tarjetas */
+  .glass{position:relative;overflow:hidden}
+  .glass::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(240,168,61,.16),transparent 70%)}
+  .glass:hover::before{opacity:1}
+  .glass>*{position:relative}
+  .stagger>*{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;transition-delay:calc(var(--k,0)*90ms)}
+  .stagger.in>*{opacity:1;transform:none}
+
+  /* escalera de consciencia */
+  .ladder-wrap{margin-top:26px}
+  .ladder{list-style:none;display:grid;gap:7px;position:relative}
+  .ladder li{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:14px;border:1px solid var(--line);
+    color:#8f8274;font-size:15px;background:rgba(255,255,255,.02);transition:all .5s ease}
+  .ladder li .v{font-family:'Space Mono',monospace;font-size:12px}
+  .ladder li.on{color:var(--ink);border-color:rgba(240,168,61,.55);background:rgba(240,168,61,.09);box-shadow:0 0 22px rgba(240,168,61,.14);transform:translateX(4px)}
+  .ladder li.low.on{border-color:rgba(160,150,140,.5);background:rgba(160,150,140,.07);box-shadow:none}
+  .ladder li.cut{border:0;background:none;padding:2px 0;justify-content:center;gap:10px;color:var(--gold);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.4;transform:none}
+  .ladder li.cut::before,.ladder li.cut::after{content:"";height:1px;flex:1;background:var(--gold);opacity:.6}
+  .ladder li.cut.on{opacity:1;color:var(--gold-b);text-shadow:0 0 14px var(--gold);transform:none;box-shadow:none}
+  .ladder-cap{margin-top:14px;font-size:14px}
+
+  /* timeline método */
+  .tl{position:relative;margin-top:26px;padding-left:0}
+  .tl-line{position:absolute;left:19px;top:10px;bottom:10px;width:2px;background:var(--line);border-radius:2px}
+  .tl-line i{display:block;width:100%;height:0;background:linear-gradient(var(--gold-b),var(--gold-d));box-shadow:0 0 12px var(--gold);border-radius:2px}
+  .tl .step{position:relative;margin-bottom:14px}
+  .tl .step .n{background:var(--bg);transition:all .5s ease;position:relative;z-index:1}
+  .tl .step.on .n{background:var(--gold);color:var(--on-gold);border-color:var(--gold);box-shadow:0 0 18px rgba(240,168,61,.6);font-weight:700}
+
+  /* precios */
+  .plan{overflow:visible}
+  .plan::before{border-radius:22px}
+  .plan.best::after{content:"";position:absolute;inset:-1px;border-radius:22px;padding:1px;pointer-events:none;
+    background:conic-gradient(from var(--ang,0deg),transparent 0 70%,var(--gold-b) 85%,transparent 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite}
+  @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+  @keyframes spin{to{--ang:360deg}}
+
+  /* barra fija mobile */
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+    background:rgba(12,9,5,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .4s ease}
+  .sticky.show{transform:none}
+  .sticky span{font-size:13px;color:var(--dim);line-height:1.3}
+  .sticky .btn{padding:11px 18px;font-size:14px;white-space:nowrap}
+  @media (min-width:700px){.sticky{display:none}}
+  @media (prefers-reduced-motion:reduce){
+    .orb,.rings i,.btn.pulse,.plan.best::after{animation:none!important}
+    .words .w,.fade{opacity:1;transform:none;animation:none}
+    .stagger>*{opacity:1;transform:none;transition:none}
+    .ladder li,.tl .step .n{transition:none}
+  }
 </style>
 </head>
 <body>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb a" data-par="0.25"></div><div class="orb b" data-par="0.15"></div></div>
+<div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="wrap">
 
   <div class="top">
@@ -104,12 +185,20 @@
 
   <!-- HERO -->
   <section class="hero">
-    <span class="badge">Miembros fundadores · precio congelado</span>
-    <h1>Dejá de empezar de cero. Convertite en la persona que <em>admirás y respetás</em>.</h1>
-    <p class="sub">Mentorías en vivo cada semana, una comunidad que te sostiene y un método para que el cambio deje de depender de tu motivación.</p>
-    <div class="row">
-      <a class="btn" href="#planes" data-ev="HeroPlanes">Ver planes de fundador →</a>
+    <span class="badge fade">Miembros fundadores · precio congelado</span>
+    <h1 class="words" aria-label="Dejá de empezar de cero. Convertite en la persona que admirás y respetás.">
+      <span class="w" style="--i:0" aria-hidden="true">Dejá</span> <span class="w" style="--i:1" aria-hidden="true">de</span> <span class="w" style="--i:2" aria-hidden="true">empezar</span> <span class="w" style="--i:3" aria-hidden="true">de</span> <span class="w" style="--i:4" aria-hidden="true">cero.</span>
+      <span class="w" style="--i:5" aria-hidden="true">Convertite</span> <span class="w" style="--i:6" aria-hidden="true">en</span> <span class="w" style="--i:7" aria-hidden="true">la</span> <span class="w" style="--i:8" aria-hidden="true">persona</span> <span class="w" style="--i:9" aria-hidden="true">que</span> <em class="w" style="--i:10" aria-hidden="true">admirás</em> <em class="w" style="--i:11" aria-hidden="true">y</em> <em class="w" style="--i:12" aria-hidden="true">respetás.</em>
+    </h1>
+    <p class="sub fade" style="animation-delay:1.2s">Mentorías en vivo cada semana, una comunidad que te sostiene y un método para que el cambio deje de depender de tu motivación.</p>
+    <div class="row fade" style="animation-delay:1.4s">
+      <a class="btn pulse" href="#planes" data-ev="HeroPlanes">Ver planes de fundador →</a>
       <a class="btn ghost" data-wa="Hola Santi, quiero saber más sobre la Sala El Despertar." data-plan="consulta" href="#">Hablar con Santi</a>
+    </div>
+    <div class="stats fade" style="animation-delay:1.6s">
+      <div class="glass stat"><b data-count="52">52</b><span>mentorías en vivo al año</span></div>
+      <div class="glass stat"><b data-count="4">4</b><span>etapas del método</span></div>
+      <div class="glass stat"><b data-count="7">7</b><span>días de garantía</span></div>
     </div>
   </section>
 
@@ -125,23 +214,48 @@
     </ul>
   </section>
 
+  <!-- ESCALERA DE CONSCIENCIA -->
+  <section class="reveal">
+    <span class="eyebrow">Tu punto de partida</span>
+    <h2>Todo estado tiene un <em>nivel</em>. Y el nivel se puede subir.</h2>
+    <p>Trabajamos con el mapa de niveles de consciencia (Dr. David R. Hawkins). Debajo de la línea de 200 la energía te debilita; arriba, te fortalece. La Sala te ayuda a cruzarla y a sostenerte arriba.</p>
+    <div class="ladder-wrap">
+      <ul class="ladder" id="ladder" aria-label="Escala de niveles de consciencia, de menor a mayor">
+        <li data-v="600"><span>Paz</span><span class="v">600</span></li>
+        <li data-v="500"><span>Amor</span><span class="v">500</span></li>
+        <li data-v="400"><span>Razón</span><span class="v">400</span></li>
+        <li data-v="350"><span>Aceptación</span><span class="v">350</span></li>
+        <li data-v="310"><span>Voluntad</span><span class="v">310</span></li>
+        <li data-v="250"><span>Neutralidad</span><span class="v">250</span></li>
+        <li data-v="200"><span>Coraje</span><span class="v">200</span></li>
+        <li class="cut" id="cut">La línea · 200</li>
+        <li class="low" data-v="175"><span>Orgullo</span><span class="v">175</span></li>
+        <li class="low" data-v="150"><span>Ira</span><span class="v">150</span></li>
+        <li class="low" data-v="100"><span>Miedo</span><span class="v">100</span></li>
+        <li class="low" data-v="50"><span>Apatía</span><span class="v">50</span></li>
+        <li class="low" data-v="20"><span>Vergüenza</span><span class="v">20</span></li>
+      </ul>
+      <p class="ladder-cap small">Mapa de niveles publicado por el Dr. David R. Hawkins. Es una herramienta de autoconocimiento, no un diagnóstico. <a href="test.html" style="color:var(--gold-b)">Descubrí dónde estás hoy con el test gratis →</a></p>
+    </div>
+  </section>
+
   <!-- MÉTODO -->
   <section class="reveal">
     <span class="eyebrow">El método</span>
     <h2>Del autoconocimiento a una identidad nueva, en <em>4 etapas</em>.</h2>
-    <div class="grid">
+    <div class="tl" id="tl"><div class="tl-line" aria-hidden="true"><i id="tlfill"></i></div>
       <div class="glass step"><div class="n">01</div><div><h3>Conciencia</h3><p>Ves tu punto de partida real, sin negación ni excusas.</p></div></div>
       <div class="glass step"><div class="n">02</div><div><h3>Compromiso</h3><p>Definís un plan concreto, con métricas simples y alcanzables.</p></div></div>
       <div class="glass step"><div class="n">03</div><div><h3>Acción sostenida</h3><p>Ejecutás con acompañamiento semanal y ajustás en el camino.</p></div></div>
       <div class="glass step"><div class="n">04</div><div><h3>Transformación estable</h3><p>El cambio deja de depender de la motivación puntual y pasa a ser parte de quién sos.</p></div></div>
-    </div>
+    </div></div>
   </section>
 
   <!-- QUÉ INCLUYE -->
   <section class="reveal">
     <span class="eyebrow">Qué incluye hoy</span>
     <h2>Lo que recibís al <em>entrar</em>.</h2>
-    <div class="grid">
+    <div class="grid stagger">
       <div class="glass"><h3>Mentoría grupal en vivo, cada semana</h3><p>Sesiones con Santi para trabajar tu proceso, resolver dudas en vivo y ajustar tu plan.</p></div>
       <div class="glass"><h3>Comunidad privada</h3><p>Personas comprometidas con su cambio. Cambiás tu entorno y dejás de sostener todo vos solo.</p></div>
       <div class="glass"><h3>Hábitos y mentalidad</h3><p>Mapa de niveles de consciencia y herramientas prácticas de aplicación diaria para pasar de reaccionar a elegir.</p></div>
@@ -175,7 +289,7 @@
     <span class="eyebrow">Entrada de miembros fundadores</span>
     <h2>Elegí tu plan. <em>El precio de fundador se congela.</em></h2>
     <p>Quienes entran ahora mantienen este precio mientras sigan siendo miembros. Más adelante, el precio para nuevos ingresos va a subir.</p>
-    <div class="plans">
+    <div class="plans stagger">
       <div class="glass plan">
         <h3>Mensual</h3>
         <div class="price">$150 <small>USD</small></div>
@@ -244,6 +358,65 @@
   </footer>
 </div>
 
+<div class="sticky" id="sticky"><span>Entrada de fundadores<br><b style="color:var(--ink)">Desde USD 75/mes</b></span><a class="btn" href="#planes" data-ev="StickyPlanes">Ver planes</a></div>
+
+<script>
+  (function(){
+    var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var prog=document.getElementById('prog'),sticky=document.getElementById('sticky');
+    var pars=[].slice.call(document.querySelectorAll('[data-par]'));
+    var ladder=[].slice.call(document.querySelectorAll('#ladder li'));
+    var tl=document.getElementById('tl'),tlfill=document.getElementById('tlfill');
+    var steps=tl?[].slice.call(tl.querySelectorAll('.step')):[];
+    var planes=document.getElementById('planes');
+    var ladderEl=document.getElementById('ladder');
+    function clamp(v){return Math.max(0,Math.min(1,v))}
+    var tick=false;
+    function update(){
+      tick=false;
+      var y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;
+      prog.style.width=(h>0?y/h*100:0)+'%';
+      if(!RM) pars.forEach(function(p){p.style.transform='translateY('+(y*p.getAttribute('data-par'))+'px)'});
+      // barra fija: aparece pasado el hero, se oculta sobre los planes
+      var pr=planes?planes.getBoundingClientRect():null;
+      var over=pr&&pr.top<innerHeight*.9&&pr.bottom>0;
+      sticky.classList.toggle('show',y>innerHeight*.8&&!over);
+      // escalera: se enciende de abajo hacia arriba según el scroll
+      if(ladderEl){
+        var r=ladderEl.getBoundingClientRect();
+        var p=clamp((innerHeight*.85-r.top)/(r.height+innerHeight*.25));
+        var n=ladder.length,lit=Math.round(p*n);
+        ladder.forEach(function(li,i){li.classList.toggle('on',(n-1-i)<lit)});
+      }
+      // timeline
+      if(tl){
+        var t=tl.getBoundingClientRect();
+        var q=clamp((innerHeight*.7-t.top)/t.height);
+        tlfill.style.height=(q*100)+'%';
+        steps.forEach(function(s,i){
+          var sr=s.getBoundingClientRect();
+          s.classList.toggle('on',sr.top<innerHeight*.7);
+        });
+      }
+    }
+    function req(){if(!tick){tick=true;requestAnimationFrame(update)}}
+    addEventListener('scroll',req,{passive:true});addEventListener('resize',req);update();
+    // spotlight que sigue al cursor
+    document.querySelectorAll('.glass').forEach(function(g){
+      g.addEventListener('pointermove',function(e){var b=g.getBoundingClientRect();g.style.setProperty('--mx',(e.clientX-b.left)+'px');g.style.setProperty('--my',(e.clientY-b.top)+'px')});
+    });
+    // contadores
+    function count(el){
+      var to=+el.getAttribute('data-count');if(RM){el.textContent=to;return}
+      var t0=null;function f(t){if(!t0)t0=t;var k=Math.min((t-t0)/1100,1);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)}
+      el.textContent='0';requestAnimationFrame(f);
+    }
+    var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);co.unobserve(e.target)}})},{threshold:.6});
+    document.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+    // stagger: índice por hijo
+    document.querySelectorAll('.stagger').forEach(function(g){[].slice.call(g.children).forEach(function(c,i){c.style.setProperty('--k',i)})});
+  })();
+</script>
 <script>
   (function(){
     var WA='5491159436724';
@@ -262,7 +435,7 @@
       a.addEventListener('click',function(){ if(typeof fbq!=='undefined'){fbq('trackCustom','Sala'+a.getAttribute('data-ev'));} });
     });
     // Aparición suave al scrollear
-    var els=document.querySelectorAll('.reveal');
+    var els=document.querySelectorAll('.reveal,.stagger');
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
       els.forEach(function(el){io.observe(el)});

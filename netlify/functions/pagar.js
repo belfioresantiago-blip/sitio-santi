@@ -32,7 +32,7 @@ a{display:block;padding:14px;border-radius:14px;text-decoration:none;font-weight
 <p>No se te cobró nada. Probá de nuevo en unos segundos o escribime y lo resolvemos al toque.</p>
 <a class="p" href="/.netlify/functions/pagar">Reintentar</a>
 <a class="s" href="${WHATSAPP}">Escribirme por WhatsApp</a>
-<a class="s" href="${origin}/reto-21-dias.html">Volver</a></div></body></html>`;
+<a class="s" href="${origin}/reto-21-dias">Volver</a></div></body></html>`;
 }
 
 exports.handler = async (event) => {
@@ -58,8 +58,8 @@ exports.handler = async (event) => {
       }],
       back_urls: {
         success: `${origin}/gracias-reto.html`,
-        pending: `${origin}/reto-21-dias.html`,
-        failure: `${origin}/reto-21-dias.html`,
+        pending: `${origin}/reto-21-dias`,
+        failure: `${origin}/reto-21-dias`,
       },
       auto_return: 'approved',
       notification_url: `${origin}/.netlify/functions/mp-webhook`,

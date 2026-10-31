@@ -405,6 +405,33 @@
 .proof p{font-size:14px;line-height:1.6;color:var(--cream);margin-bottom:14px}
 .proof-slot{border:1px dashed rgba(255,209,102,.4);border-radius:14px;padding:14px;font-size:13px;color:var(--gold-light)}
 .proof-slot span{font-weight:800;margin-right:6px}
+</style><style id="v2">
+.hero h1 em{background:linear-gradient(100deg,#ffd166 0%,#ffab2e 35%,#fff0c2 50%,#ffab2e 65%,#ffd166 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shimmer 5s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.hero .subpromise{color:#e3dccd;font-size:15px;line-height:1.6}
+.hero>*{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both}
+.hero>*:nth-child(2){animation-delay:.08s}.hero>*:nth-child(3){animation-delay:.16s}.hero>*:nth-child(4){animation-delay:.24s}.hero>*:nth-child(5){animation-delay:.32s}.hero>*:nth-child(6){animation-delay:.4s}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hl{background:linear-gradient(transparent 58%,rgba(255,171,46,.38) 58%) no-repeat 0 0/0% 100%;color:inherit;font-weight:700;padding:0 2px;transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) .5s;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.in .hl,.hero .hl{background-size:100% 100%}
+.hero .hl{animation:none;transition-delay:1s}
+.btn-primary{animation:ctaPulse 2.8s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{box-shadow:0 12px 30px rgba(255,171,46,.35)}50%{box-shadow:0 12px 44px rgba(255,171,46,.65),0 0 0 6px rgba(255,171,46,.10)}}
+.pain:not(.good) p{transition:opacity .8s ease .5s,color .8s ease .5s}
+.in .pain:not(.good) p{opacity:.62}
+.pain span{display:inline-block;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .35s}
+.in .pain span,.in.pain span{transform:scale(1)}
+.pain.good{background:linear-gradient(90deg,rgba(255,171,46,.14),transparent);border-radius:12px;padding-left:12px;margin:6px -6px 0;box-shadow:inset 3px 0 0 var(--gold)}
+.why-item .ck{display:inline-block;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .3s}
+.in .why-item .ck{transform:scale(1)}
+.glass{transition:border-color .5s ease,box-shadow .6s ease}
+.glass.is-focus{border-color:rgba(255,171,46,.45);box-shadow:0 18px 50px rgba(255,171,46,.10),0 0 0 1px rgba(255,171,46,.12) inset}
+.gold-em{color:var(--gold-light);font-style:italic}
+.offer-final .v{text-shadow:0 0 28px rgba(255,171,46,.0);transition:text-shadow 1.2s ease .4s}
+.in .offer-final .v,.offer-panel.in .offer-final .v{text-shadow:0 0 34px rgba(255,171,46,.5)}
+.guide img{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,171,46,.35)}
+.pain.good b,.guide h3{background:none}
+@media (prefers-reduced-motion:reduce){.hero>*,.hero h1 em,.btn-primary{animation:none!important}.hl{background-size:100% 100%!important;transition:none}.pain span,.why-item .ck{transform:none!important;transition:none}}
 </style></head>
 <body>
 
@@ -427,10 +454,10 @@
   <section class="glass hero reveal" id="reto">
     <div class="method-badge">Reto de 21 días · Camada de lanzamiento</div>
     <h1>Dejá de empezar de nuevo.<br><em>Terminá lo que te prometés.</em></h1>
-    <p class="subpromise">Un sistema de 21 días — mentalidad, entrenamiento, nutrición y hábitos — para dejar de postergarte. Si fallás un día, reiniciás desde el Día 1 conmigo.</p>
+    <p class="subpromise">Un sistema para que dejes de romper tus promesas y <mark class="hl">empieces a cumplirlas, día por día</mark>. Mentalidad, entrenamiento, nutrición y hábitos en un solo plan. Si fallás un día, reiniciás desde el Día 1 conmigo.</p>
     <div class="hero-price"><span class="hp-now" data-precio>$27.900</span><span class="hp-note">pago único · precio de lanzamiento<br>PDF de 33 páginas, rutina PPL, calculadora de macros y 5 bonos</span></div>
     <div class="cta-row">
-      <a class="btn btn-primary btn-xl" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Quiero empezar el reto →</a>
+      <a class="btn btn-primary btn-xl" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Sí, quiero cumplir mis promesas →</a>
       <a class="btn-link" href="#incluye">Ver qué incluye ↓</a>
     </div>
     <div class="trust-row">
@@ -444,8 +471,8 @@
     <h2>Sabés qué tenés que hacer.<br>El problema es sostenerlo.</h2>
   </div>
   <div class="glass pain-list reveal">
-    <div class="pain"><span>✕</span><p>El lunes arrancás con todo. El jueves ya te estás explicando por qué hoy no.</p></div>
-    <div class="pain"><span>✕</span><p>Probaste rutinas, dietas y apps. Todas duraron lo que duró la motivación.</p></div>
+    <div class="pain"><span>✕</span><p>El lunes te prometés que esta vez sí. El jueves ya estás buscando excusas para empezar de nuevo el próximo lunes.</p></div>
+    <div class="pain"><span>✕</span><p>Descargaste apps, seguiste rutinas y probaste dietas. Todo funcionó… hasta que la motivación desapareció.</p></div>
     <div class="pain"><span>✕</span><p>Cada promesa rota pesa más que la anterior, y ya casi no te creés.</p></div>
     <div class="pain good"><span>✓</span><p><b>No te falta información ni voluntad.</b> Te falta un sistema que no dependa de tener ganas. Eso es este reto.</p></div>
   </div>
@@ -455,7 +482,7 @@
     <div>
       <div class="eyebrow" style="text-align:left">Quién te guía</div>
       <h3>Soy Santi.</h3>
-      <p>Pasé mucho tiempo sabiendo qué hacer y sin hacerlo. Este reto es el sistema que armé para salir de ahí, tal cual lo viví, día por día. No te lo vendo como teoría: te lo paso completo y te acompaño.</p>
+      <p>Yo también fui esa persona que sabía exactamente qué hacer, pero no lo hacía. Me prometía cambios cada lunes y me rendía cada jueves. <mark class="hl">Este reto es el sistema que me sacó de ahí</mark>, y ahora quiero pasártelo a vos.</p>
     </div>
   </section>
 
@@ -506,10 +533,10 @@
     <h2>¿Qué resultados<br>vas a lograr?</h2>
   </div>
   <div class="glass whyfor-list reveal" style="margin-bottom:20px;">
-    <div class="why-item"><span class="ck">✓</span><p>Más energía y enfoque mental</p></div>
-    <div class="why-item"><span class="ck">✓</span><p>Un físico más fuerte y definido</p></div>
+    <div class="why-item"><span class="ck">✓</span><p>Te vas a levantar con más energía y claridad mental para encarar tu día</p></div>
+    <div class="why-item"><span class="ck">✓</span><p>Vas a empezar a verte en el espejo y sentirte orgulloso de lo que ves</p></div>
     <div class="why-item"><span class="ck">✓</span><p>Hábitos sólidos y duraderos</p></div>
-    <div class="why-item"><span class="ck">✓</span><p>Confianza y autoestima al máximo</p></div>
+    <div class="why-item"><span class="ck">✓</span><p>Vas a recuperar la confianza en vos mismo y en tu palabra</p></div>
     <div class="why-item"><span class="ck">✓</span><p>Disciplina que se vuelve tu estándar</p></div>
     <div class="why-item"><span class="ck">✓</span><p>Una nueva identidad, imparable</p></div>
   </div>
@@ -535,7 +562,7 @@
 
   <div class="glass community-panel reveal">
     <div class="community-badge">Comunidad de Ganadores</div>
-    <p class="community-text">No armamos solo una transformación individual. Armamos un entorno — gente que se sostiene entre sí de por vida, que construye relaciones y compañerismo real más allá del reto. No comprás un PDF que descargás y olvidás: entrás a un lugar donde te van a conocer por tu nombre, y donde en un mes vas a ser vos quien sostenga a alguien más.</p>
+    <p class="community-text">No estás solo en esto. Entrás a un grupo donde <mark class="hl">te van a conocer por tu nombre</mark>, donde cada avance se celebra y cada caída se levanta. En un mes, vas a ser vos quien inspire a alguien más.</p>
     <div class="whatsapp-tag">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.32a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.24-8.24m-4.53 4.7c-.17 0-.45.06-.68.32-.23.25-.9.87-.9 2.13 0 1.25.92 2.46 1.05 2.63.13.17 1.79 2.87 4.43 3.91.62.24 1.1.39 1.48.5.62.2 1.19.17 1.63.1.5-.07 1.53-.62 1.75-1.23s.22-1.12.15-1.23c-.06-.1-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.53-1.43-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.5-.42-.44-.58-.45z"/></svg>
       Grupo privado de WhatsApp — solo para alumnos
@@ -613,7 +640,11 @@
   <div class="faq-list reveal">
     <details class="glass faq-item">
       <summary>¿Necesito experiencia previa en el gimnasio?</summary>
-      <div class="a">No. La rutina incluye warm-up y progresión de intensidad — arrancás desde donde estés hoy, no desde donde "deberías" estar.</div>
+      <div class="a">No. La rutina está explicada paso a paso, con warm-up y progresión de intensidad, y la adaptás a tu nivel actual. Da igual si recién empezás o si ya entrenás: arrancás desde donde estés hoy, no desde donde "deberías".</div>
+    </details>
+    <details class="glass faq-item">
+      <summary>¿Qué pasa si no tengo tiempo?</summary>
+      <div class="a">El reto pide un espacio fijo cada día: entrenar, 20 minutos de lectura o audio, y tener tus comidas listas. No son horas sueltas, es una rutina diaria que tenés que poder sostener. Si hoy no podés, escribime antes de comprar y vemos juntos si es tu momento.</div>
     </details>
     <details class="glass faq-item">
       <summary>¿La rutina requiere gimnasio equipado?</summary>
@@ -639,7 +670,7 @@
 
   <div class="reveal" id="oferta">
     <div class="eyebrow">Precio de lanzamiento · tiempo limitado</div>
-    <h2 style="margin-bottom:10px">Invertí en vos.<br>Transformá tu vida.</h2>
+    <h2 style="margin-bottom:10px">Hoy es el día para dejar de empezar de nuevo.<br><span class="gold-em">Elegí cumplirte.</span></h2>
   </div>
   <div class="reveal">
     <div class="eyebrow">Lo que recibís</div>
@@ -653,7 +684,7 @@
     <div class="offer-row"><span class="num">🎁</span><div style="flex:1"><div class="name">Los 5 bonos regalo de arriba</div><div class="desc">Mapa de la Conciencia, sesión en vivo, checklist y comunidad.</div></div><span class="val">$76.900</span></div>
     <div class="offer-total"><span class="l">Valor total</span><span class="v" data-valor>$186.800</span></div>
     <div class="offer-final"><span class="l">Precio de<br>lanzamiento</span><span class="v"><span class="cur">$</span><span data-precio-num>27.900</span></span></div>
-    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Quiero empezar el reto →</a>
+    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Sí, quiero cumplir mis promesas →</a>
     <a class="whatsapp-claim" href="https://wa.me/5491159436724?text=Hola%20Santi!%20Ya%20compr%C3%A9%20el%20Reto%20de%2021%20D%C3%ADas%20desde%20la%20landing%2C%20quiero%20mis%20bonos%20%F0%9F%8E%81" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.32a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.24-8.24m-4.53 4.7c-.17 0-.45.06-.68.32-.23.25-.9.87-.9 2.13 0 1.25.92 2.46 1.05 2.63.13.17 1.79 2.87 4.43 3.91.62.24 1.1.39 1.48.5.62.2 1.19.17 1.63.1.5-.07 1.53-.62 1.75-1.23s.22-1.12.15-1.23c-.06-.1-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.53-1.43-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.5-.42-.44-.58-.45z"/></svg>
       ¿Ya compraste? Tocá acá y te mando tus bonos
@@ -690,14 +721,14 @@
     <span class="fc-tag">Precio de lanzamiento</span>
     <span class="fc-price"><span data-precio>$27.900</span><span class="was" data-valor>$186.800</span></span>
   </div>
-  <a class="fc-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Empezar el reto →</a>
+  <a class="fc-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Quiero cumplir →</a>
 </div>
 
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // 1) Hijos en cascada: cada grupo escalona sus items
-  const STG_SEL = '.pillar,.check-item,.why-item,.bonus-row,.price-col,.week,.testi,.offer-row,.faq-item,.cd-box,.t-item,.stat';
+  const STG_SEL = '.pillar,.check-item,.why-item,.bonus-row,.price-col,.week,.testi,.offer-row,.faq-item,.cd-box,.t-item,.stat,.pain';
   document.querySelectorAll('.reveal').forEach(group=>{
     const idx = new Map();
     group.querySelectorAll(STG_SEL).forEach(el=>{
@@ -842,5 +873,14 @@
   })();
 </script>
 
+<script>
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.target.classList.toggle('is-focus', e.isIntersecting); });
+  }, { rootMargin:'-38% 0px -38% 0px', threshold:0 });
+  document.querySelectorAll('.glass:not(nav):not(.hero):not(.float-cta)').forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>

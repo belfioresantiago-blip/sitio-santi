@@ -634,6 +634,44 @@ footer{color:#86868b}
  .glass:hover::before{opacity:1}
 }
 @media (prefers-reduced-motion:reduce){.mq-track{animation:none}.chart path{stroke-dashoffset:0!important;animation:none!important}.chart .dot-end{opacity:1;animation:none}.btn-primary::after,.buy-btn::after{display:none}.week::after{transform:scaleX(1);transition:none}.offer-total .v::after{transform:scaleX(1);transition:none}}
+</style><style id="carrusel">
+.pieces{margin:34px auto 40px;max-width:760px!important;user-select:none}
+.pc-stage{position:relative;height:450px;perspective:1100px;touch-action:pan-y;display:flex;justify-content:center}
+.pc{position:absolute;top:0;left:50%;width:min(250px,64vw);height:430px;margin-left:calc(min(250px,64vw)/-2);padding:20px 20px;border-radius:26px;color:#fff;cursor:pointer;
+ background:radial-gradient(120% 80% at 50% 0,rgba(255,176,32,.22),transparent 60%),linear-gradient(165deg,#1f1a14,#0d0b09);border:1px solid rgba(255,176,32,.35);
+ box-shadow:0 30px 60px rgba(20,20,30,.28),0 0 0 1px rgba(255,255,255,.04) inset;overflow:hidden;display:flex;flex-direction:column;
+ transition:transform .9s cubic-bezier(.22,.8,.2,1),opacity .7s ease,filter .7s ease,box-shadow .7s ease;will-change:transform,opacity}
+.pc.is-active{transform:translate3d(0,0,60px) scale(1);z-index:3;opacity:1;animation:bob 5s ease-in-out infinite;box-shadow:0 36px 70px rgba(240,122,10,.28),0 0 0 1px rgba(255,176,32,.5)}
+.pc.is-far{transform:translate3d(0,20px,-220px) scale(.7);opacity:0;pointer-events:none;z-index:1}
+.pc.is-prev{transform:translate3d(-58%,14px,-60px) rotateY(24deg) scale(.82);z-index:2;opacity:.78;filter:saturate(.8)}
+.pc.is-next{transform:translate3d(58%,14px,-60px) rotateY(-24deg) scale(.82);z-index:2;opacity:.78;filter:saturate(.8)}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.pc::after{content:"";position:absolute;top:-20%;left:-80%;width:45%;height:140%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-18deg);pointer-events:none}
+.pc.is-active::after{animation:pcsheen 1.4s ease .5s 1}
+@keyframes pcsheen{to{left:140%}}
+.pc-ic{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#ffb020;background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.35);margin-bottom:12px}
+.pc-ic svg{width:30px;height:30px}
+.pc-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ffb020;font-weight:700;margin-bottom:6px}
+.pc-title{font-family:'Inter',sans-serif;font-size:20px;line-height:1.15;font-weight:800;letter-spacing:-.03em;color:#fff!important;margin-bottom:12px}
+.pc-pain,.pc-gain{font-size:12.5px;line-height:1.45;color:#d2d2d8;margin:0}
+.pc-pain b,.pc-gain b{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+.pc-pain{padding:10px 12px;border-radius:12px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.22);margin-bottom:10px}
+.pc-pain b{color:#fca5a5}
+.pc-gain{margin-top:auto;padding:10px 12px;border-radius:12px;background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.3);color:#fff}
+.pc-gain b{color:#ffb020}
+.pc-list{list-style:none;margin-top:auto;display:grid;gap:6px;padding:10px 12px;border-radius:12px;background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.3)}
+.pc-list li{font-size:12px;line-height:1.35;color:#e8e8ec;padding-left:16px;position:relative}
+.pc-list li::before{content:"✓";position:absolute;left:0;color:#ffb020;font-weight:800}
+.pc-list strong{color:#fff}
+.pc-dots{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.pc-dots button{border:0;background:#dcdce2;width:34px;height:6px;border-radius:99px;padding:0;position:relative;overflow:hidden;cursor:pointer}
+.pc-dots i{position:absolute;inset:0;background:linear-gradient(90deg,#ffb020,#ea580c);transform:scaleX(0);transform-origin:left}
+.pc-dots button.on i{animation:fillbar var(--t,3400ms) linear forwards}
+.pieces.paused .pc-dots button.on i{animation-play-state:paused}
+.pc-dots button.done i{transform:scaleX(1)}
+@keyframes fillbar{to{transform:scaleX(1)}}
+@media (min-width:900px){.pc{width:280px;margin-left:-140px;height:430px}.pc-stage{height:450px}.pc.is-prev{transform:translate3d(-72%,14px,-80px) rotateY(26deg) scale(.84)}.pc.is-next{transform:translate3d(72%,14px,-80px) rotateY(-26deg) scale(.84)}}
+@media (prefers-reduced-motion:reduce){.pc,.pc.is-active{animation:none;transition:none}.pc::after{display:none}}
 </style></head>
 <body>
 
@@ -657,7 +695,7 @@ footer{color:#86868b}
     <div class="method-badge">Reto de 21 días · Camada de lanzamiento</div>
     <h1>Dejá de empezar de nuevo.<br><em>Terminá lo que te prometés.</em></h1>
     <p class="subpromise">Un sistema para que dejes de romper tus promesas y <mark class="hl">empieces a cumplirlas, día por día</mark>. Mentalidad, entrenamiento, nutrición y hábitos en un solo plan. Si fallás un día, reiniciás desde el Día 1 conmigo.</p>
-    <div class="hero-price"><span class="hp-now" data-precio>$27.900</span><span class="hp-note">pago único · precio de lanzamiento<br>PDF de 33 páginas, rutina PPL, calculadora de macros y 5 bonos</span></div>
+    <div class="hero-price"><span class="hp-now" data-precio>$27.900</span><span class="hp-note">pago único · precio de lanzamiento<br>guía completa, rutina PPL, calculadora de macros y 5 bonos</span></div>
     <div class="streak" aria-label="Animación: una racha de 21 días; si fallás un día, reiniciás desde el Día 1">
       <div class="st-dots" id="stDots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="st-cap" id="stCap">Día 1 → Día 21</div>
@@ -734,13 +772,41 @@ footer{color:#86868b}
     <h2 id="incluye">¿Qué incluye el método?</h2>
     <p style="text-align:center; font-size:12.5px; color:var(--muted); max-width:380px; margin:0 auto 4px; line-height:1.55;">Todo lo que necesitás para tu transformación, no información suelta.</p>
   </div>
-  <div class="mockup-stack reveal">
-    <div class="mockup-card left"><div class="mc-label">PDF · 33 págs</div><div class="mc-title">Guía completa día a día</div></div>
-    <div class="mockup-card center"><div class="mc-label">El Método</div><div class="mc-title">21 Días<br>Ser + Hacer = Tener</div></div>
-    <div class="mockup-card right"><div class="mc-label">Entrenamiento</div><div class="mc-title">Rutina PPL + Macros</div></div>
+  <div class="pieces reveal" id="pieces" aria-roledescription="carrusel" aria-label="Lo que incluye el reto">
+    <div class="pc-stage">
+      <article class="pc" data-i="0">
+        <div class="pc-ic"><svg viewBox="0 0 48 48" fill="none"><rect x="12" y="6" width="24" height="34" rx="3" stroke="currentColor" stroke-width="2.5"/><path d="M18 16h12M18 22h12M18 28h7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="17" y="10" width="24" height="34" rx="3" stroke="currentColor" stroke-width="2" opacity=".35"/></svg></div>
+        <div class="pc-label">La guía completa</div>
+        <h3 class="pc-title">Un plan para cada día</h3>
+        <p class="pc-pain"><b>Te pasa</b>Arrancás motivado y al tercer día ya no sabés qué hacer.</p>
+        <p class="pc-gain"><b>Lo que cambia</b>21 módulos, uno por día: abrís, lo hacés y listo. Sin decidir nada.</p>
+      </article>
+      <article class="pc" data-i="1">
+        <div class="pc-ic"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="2.5" opacity=".35"/><path d="M24 7a17 17 0 1 1-12 5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><text x="24" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="currentColor" font-family="Inter,sans-serif">21</text></svg></div>
+        <div class="pc-label">El método</div>
+        <h3 class="pc-title">Ser + Hacer = Tener</h3>
+        <p class="pc-pain"><b>Te pasa</b>Cambiás una sola cosa y a las dos semanas todo vuelve a lo de siempre.</p>
+        <p class="pc-gain"><b>Lo que cambia</b>Mentalidad, entrenamiento, nutrición y hábitos juntos: romper, construir y consolidar en 3 semanas.</p>
+      </article>
+      <article class="pc" data-i="2">
+        <div class="pc-ic"><svg viewBox="0 0 48 48" fill="none"><path d="M8 19v10M14 14v20M34 14v20M40 19v10M14 24h20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div class="pc-label">Entrenamiento y macros</div>
+        <h3 class="pc-title">Rutina PPL + calculadora</h3>
+        <p class="pc-pain"><b>Te pasa</b>Vas al gimnasio sin saber qué hacer, ni cuánto comer.</p>
+        <p class="pc-gain"><b>Lo que cambia</b>Push, Pull y Legs con progresión, y tus macros calculados online. Entrás sabiendo qué toca.</p>
+      </article>
+      <article class="pc pc-bonus" data-i="3">
+        <div class="pc-ic"><svg viewBox="0 0 48 48" fill="none"><rect x="8" y="20" width="32" height="20" rx="3" stroke="currentColor" stroke-width="2.5"/><path d="M6 14h36v6H6zM24 14v26" stroke="currentColor" stroke-width="2.5"/><path d="M24 14c-3-7-11-7-11-2s8 2 11 2zm0 0c3-7 11-7 11-2s-8 2-11 2z" stroke="currentColor" stroke-width="2.5"/></svg></div>
+        <div class="pc-label">5 bonos incluidos</div>
+        <h3 class="pc-title">No lo sostenés solo</h3>
+        <p class="pc-pain"><b>Te pasa</b>Alrededor del día 22 casi todos se sueltan y vuelven al punto de partida.</p>
+        <ul class="pc-list"><li><strong>Sesión grupal en vivo:</strong> arrancás con foco, junto a la camada</li><li><strong>30 días de comunidad:</strong> te sostienen después del reto</li><li><strong>Mapa de la Conciencia</strong> y <strong>checklist diario</strong></li><li><strong>Guía de 5 hábitos</strong> no negociables</li></ul>
+      </article>
+    </div>
+    <div class="pc-dots" role="tablist"><button type="button" aria-label="Pieza 1"><i></i></button><button type="button" aria-label="Pieza 2"><i></i></button><button type="button" aria-label="Pieza 3"><i></i></button><button type="button" aria-label="Pieza 4"><i></i></button></div>
   </div>
   <div class="glass check-list reveal">
-    <div class="check-item"><span class="ck">✓</span><div><div class="name">Guía completa en PDF <span style="color:var(--muted); font-weight:400;">(33 páginas, paso a paso día a día)</span></div></div></div>
+    <div class="check-item"><span class="ck">✓</span><div><div class="name">Guía completa en PDF <span style="color:var(--muted); font-weight:400;">(un plan paso a paso, día a día)</span></div></div></div>
     <div class="check-item"><span class="ck">✓</span><div><div class="name">Rutina de entrenamiento PPL <span style="color:var(--muted); font-weight:400;">(para gimnasio, con progresión real)</span></div></div></div>
     <div class="check-item"><span class="ck">✓</span><div><div class="name">Calculadora de macros <span style="color:var(--muted); font-weight:400;">(plan flexible, no dieta genérica)</span></div></div></div>
     <div class="check-item"><span class="ck">✓</span><div><div class="name">Sección diaria de Confrontación <span style="color:var(--muted); font-weight:400;">(para reprogramar tu mente)</span></div></div></div>
@@ -1151,6 +1217,35 @@ footer{color:#86868b}
       var r=g.getBoundingClientRect(); g.style.setProperty('--mx',(e.clientX-r.left)+'px'); g.style.setProperty('--my',(e.clientY-r.top)+'px');
     },{passive:true});
   }
+})();
+</script>
+<script>
+(function(){
+  var root=document.getElementById('pieces'); if(!root) return;
+  var cards=[].slice.call(root.querySelectorAll('.pc')), btns=[].slice.call(root.querySelectorAll('.pc-dots button'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, N=cards.length, cur=0, DUR=4200, timer=null, visible=false, held=false;
+  root.style.setProperty('--t',DUR+'ms');
+  function render(){
+    cards.forEach(function(c,i){
+      var d=(i-cur+N)%N;
+      c.classList.toggle('is-active',d===0); c.classList.toggle('is-next',d===1); c.classList.toggle('is-prev',d===N-1); c.classList.toggle('is-far',d>1&&d<N-1);
+      c.setAttribute('aria-hidden',d===0?'false':'true');
+    });
+    btns.forEach(function(b,i){ b.classList.remove('on','done'); if(i===cur){ void b.offsetWidth; b.classList.add('on'); } });
+  }
+  function go(i){ cur=(i+N)%N; render(); schedule(); }
+  function schedule(){ clearTimeout(timer); if(reduce||!visible||held) return; timer=setTimeout(function(){ go(cur+1); },DUR); }
+  function hold(v){ held=v; root.classList.toggle('paused',v); if(v) clearTimeout(timer); else go(cur); }
+  cards.forEach(function(c,i){ c.addEventListener('click',function(){ if(i!==cur) go(i); }); });
+  btns.forEach(function(b,i){ b.addEventListener('click',function(){ go(i); }); });
+  root.addEventListener('mouseenter',function(){ if(matchMedia('(hover:hover)').matches) hold(true); });
+  root.addEventListener('mouseleave',function(){ if(held) hold(false); });
+  var x0=null; root.addEventListener('pointerdown',function(e){ x0=e.clientX; });
+  root.addEventListener('pointerup',function(e){ if(x0===null) return; var dx=e.clientX-x0; x0=null; if(Math.abs(dx)>40) go(cur+(dx<0?1:-1)); });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ visible=e.isIntersecting; if(visible){ go(cur); } else { clearTimeout(timer); } }); },{threshold:.4}).observe(root);
+  } else { visible=true; }
+  render(); if(reduce){ btns[cur].classList.add('done'); } else if(visible) schedule();
 })();
 </script>
 </body>

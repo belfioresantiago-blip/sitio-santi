@@ -703,7 +703,7 @@ footer{color:#86868b}
       <div class="st-cap" id="stCap">Día 1 → Día 21</div>
     </div>
     <div class="cta-row">
-      <a class="btn btn-primary btn-xl" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Sí, quiero cumplir mis promesas →</a>
+      <a class="btn btn-primary btn-xl" href="/.netlify/functions/pagar" onclick="retoIC()">Sí, quiero cumplir mis promesas →</a>
       <a class="btn-link" href="#incluye">Ver qué incluye ↓</a>
     </div>
     <div class="trust-row">
@@ -972,7 +972,7 @@ footer{color:#86868b}
     <div class="offer-row"><span class="num">🎁</span><div style="flex:1"><div class="name">Los 5 bonos regalo de arriba</div><div class="desc">Mapa de la Conciencia, sesión en vivo, checklist y comunidad.</div></div><span class="val">$76.900</span></div>
     <div class="offer-total"><span class="l">Valor total</span><span class="v" data-valor>$186.800</span></div>
     <div class="offer-final"><span class="l">Precio de<br>lanzamiento</span><span class="v"><span class="cur">$</span><span data-precio-num>27.900</span></span></div>
-    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Sí, quiero cumplir mis promesas →</a>
+    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="retoIC()">Sí, quiero cumplir mis promesas →</a>
     <a class="whatsapp-claim" href="https://wa.me/5491159436724?text=Hola%20Santi!%20Ya%20compr%C3%A9%20el%20Reto%20de%2021%20D%C3%ADas%20desde%20la%20landing%2C%20quiero%20mis%20bonos%20%F0%9F%8E%81" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.32a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.24-8.24m-4.53 4.7c-.17 0-.45.06-.68.32-.23.25-.9.87-.9 2.13 0 1.25.92 2.46 1.05 2.63.13.17 1.79 2.87 4.43 3.91.62.24 1.1.39 1.48.5.62.2 1.19.17 1.63.1.5-.07 1.53-.62 1.75-1.23s.22-1.12.15-1.23c-.06-.1-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.53-1.43-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.92-.21-.5-.42-.44-.58-.45z"/></svg>
       ¿Ya compraste? Tocá acá y te mando tus bonos
@@ -996,7 +996,7 @@ footer{color:#86868b}
     <div class="eyebrow" style="margin-bottom:4px;">El mejor momento para cambiar tu vida</div>
     <h2 style="font-size:26px; color:var(--gold-light);">En 21 días vas a estar en el mismo lugar, o vas a ser alguien que cumplió.</h2>
     <p style="font-size:12.5px; color:var(--muted); max-width:360px; margin:-6px auto 18px; line-height:1.55;">Elegí hoy. No hace falta que estés listo al 100%: hace falta que empieces.</p>
-    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Empezar hoy por <span data-precio>$27.900</span> →</a>
+    <a class="buy-btn" href="/.netlify/functions/pagar" onclick="retoIC()">Empezar hoy por <span data-precio>$27.900</span> →</a>
     <div class="note">Pago seguro con Mercado Pago · Acceso inmediato por mail</div>
   </div>
 
@@ -1009,7 +1009,7 @@ footer{color:#86868b}
     <span class="fc-tag">Precio de lanzamiento</span>
     <span class="fc-price"><span data-precio>$27.900</span><span class="was" data-valor>$186.800</span></span>
   </div>
-  <a class="fc-btn" href="/.netlify/functions/pagar" onclick="if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout');}">Quiero cumplir →</a>
+  <a class="fc-btn" href="/.netlify/functions/pagar" onclick="retoIC()">Quiero cumplir →</a>
 </div>
 
 <script>
@@ -1158,6 +1158,18 @@ footer{color:#86868b}
   // El precio sale de precio.json (el MISMO archivo que usa la función
   // /pagar para cobrar en Mercado Pago). Si el archivo no carga, quedan
   // los valores escritos en el HTML.
+  // Eventos de Meta con el valor del precio vigente (sale de precio.json).
+  window.__retoPrecio = { value: 27900, currency: 'ARS' };
+  window.retoIC = function(){
+    if (typeof fbq === 'undefined') return;
+    fbq('track', 'InitiateCheckout', { value: window.__retoPrecio.value, currency: window.__retoPrecio.currency, content_name: 'Reto de 21 Días' });
+  };
+  let vcSent = false;
+  function retoVC(){
+    if (vcSent || typeof fbq === 'undefined') return;
+    vcSent = true;
+    fbq('track', 'ViewContent', { value: window.__retoPrecio.value, currency: window.__retoPrecio.currency, content_name: 'Reto de 21 Días', content_type: 'product' });
+  }
   (function(){
     const fmt = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     const put = (sel, txt) => document.querySelectorAll(sel).forEach(el => { el.textContent = txt; });
@@ -1165,6 +1177,7 @@ footer{color:#86868b}
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(d => {
         const precio = Number(d.precio), total = Number(d.valorTotal);
+        if (precio > 0) window.__retoPrecio = { value: precio, currency: d.moneda || 'ARS' };
         if (!(precio > 0) || !(total > precio)) return;
         const ahorro = total - precio, pct = Math.round(ahorro / total * 100);
         put('[data-precio]', '$' + fmt(precio));
@@ -1173,7 +1186,8 @@ footer{color:#86868b}
         put('[data-ahorro]', '$' + fmt(ahorro));
         put('[data-pct]', pct + '% off');
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(retoVC);
   })();
 </script>
 

@@ -249,6 +249,17 @@ function buildEmailHtml(name, email) {
         <strong style="color:#f8f2e4;">Checklist de seguimiento imprimible</strong>.
         Empezá por el Día 1 del reto — ahí están las bases que se sostienen los 21 días completos.
       </p>
+      <div style="margin:18px 0; padding:16px 18px; background:rgba(240,168,61,0.1); border:1px solid rgba(240,168,61,0.3); border-radius:12px;">
+        <p style="color:#ffcd6e; font-size:13.5px; font-weight:700; margin:0 0 10px;">
+          Antes de arrancar: medí tu nivel de conciencia
+        </p>
+        <p style="color:#cbbfa8; font-size:14px; line-height:1.6; margin:0 0 12px;">
+          Hacé el test (3 minutos) para saber desde dónde estás operando hoy. Repetilo el Día 21 y compará.
+        </p>
+        <a href="https://santibelfiore.netlify.app/test" style="display:block; text-align:center; background:#ffcd6e; color:#0a0704; font-weight:800; font-size:14px; padding:11px 16px; border-radius:10px; text-decoration:none;">
+          Hacer el test →
+        </a>
+      </div>
       <p style="color:#cbbfa8; font-size:15px; line-height:1.6;">
         Cualquier duda que tengas en el camino, escribime por Instagram a
         <a href="https://instagram.com/santibelfiore" style="color:#ffcd6e; text-decoration:none;">@santibelfiore</a>

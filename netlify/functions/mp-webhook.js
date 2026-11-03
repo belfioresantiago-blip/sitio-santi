@@ -113,7 +113,7 @@ exports.handler = async (event) => {
         html: buildEmailHtml(buyerName, buyerEmail),
         attachments: [
           {
-            filename: 'Reto-21-Dias-Santi-Belfiore.pdf',
+            filename: 'Reto-21-Dias-Completo.pdf',
             content: retoPdf,
           },
           {

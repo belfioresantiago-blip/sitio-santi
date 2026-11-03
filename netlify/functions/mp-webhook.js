@@ -202,6 +202,7 @@ exports.handler = async (event) => {
             data: [
               {
                 event_name: 'Purchase',
+                event_id: String(payment.id),
                 event_time: Math.floor(Date.now() / 1000),
                 action_source: 'website',
                 event_source_url: 'https://santibelfiore.netlify.app/reto-21-dias',

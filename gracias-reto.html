@@ -16,9 +16,22 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '4578414795776331');
   fbq('track', 'PageView');
-  // El evento de Compra ya NO se dispara acá (en el navegador).
-  // Ahora sale verificado desde el servidor (mp-webhook.js), solo
-  // cuando el pago se confirma de verdad contra Mercado Pago.
+  // Compra (navegador): el valor sale de precio.json, el mismo archivo que
+  // usa el cobro, así que siempre coincide con el precio vigente.
+  // Se dispara solo si Mercado Pago volvió con un pago aprobado, y usa el
+  // payment_id como eventID para que Meta lo deduplique con el evento del
+  // servidor (mp-webhook.js) y no cuente la compra dos veces.
+  (function(){
+    var q = new URLSearchParams(location.search);
+    var pid = q.get('payment_id') || q.get('collection_id');
+    var st = q.get('status') || q.get('collection_status');
+    if (!pid || st !== 'approved') return;
+    try { if (localStorage.getItem('reto21_purchase_'+pid)) return; } catch(e){}
+    fetch('/precio.json', {cache:'no-store'}).then(function(r){return r.json();}).then(function(c){
+      fbq('track', 'Purchase', {value: Number(c.precio), currency: c.moneda || 'ARS'}, {eventID: String(pid)});
+      try { localStorage.setItem('reto21_purchase_'+pid, '1'); } catch(e){}
+    }).catch(function(){});
+  })();
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4578414795776331&ev=PageView&noscript=1" /></noscript>
 <!-- End Meta Pixel Code -->

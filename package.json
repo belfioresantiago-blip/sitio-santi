@@ -5,5 +5,8 @@
   "description": "Hub + automatización de entrega del Reto de 21 Días",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.7.13"
   }
 }

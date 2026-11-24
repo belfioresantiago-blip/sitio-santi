@@ -13,6 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { getStore, connectLambda } = require('@netlify/blobs');
 
 const META_PIXEL_ID = '4578414795776331';
 
@@ -91,6 +92,29 @@ exports.handler = async (event) => {
     }
 
     // --------------------------------------------------------
+    // 1b) Un pago se procesa UNA sola vez. Mercado Pago puede
+    //     avisar varias veces del mismo pago (reintentos, dos
+    //     notificaciones juntas, reenvíos desde su panel). Se
+    //     "reserva" el ID del pago de forma atómica: si ya estaba
+    //     reservado, no se vuelve a enviar mail, aviso, planilla
+    //     ni evento a Meta. Si el almacenamiento falla, se sigue
+    //     igual: es peor dejar a un comprador sin su mail.
+    // --------------------------------------------------------
+    let pagosStore = null;
+    try {
+      connectLambda(event);
+      pagosStore = getStore('reto-pagos-procesados');
+      const reserva = await pagosStore.set(String(payment.id), new Date().toISOString(), { onlyIfNew: true });
+      if (reserva && reserva.modified === false) {
+        console.log('Pago ya procesado, se ignora:', payment.id);
+        return { statusCode: 200, body: 'pago ya procesado' };
+      }
+    } catch (dedupeErr) {
+      console.error('No se pudo verificar si el pago ya estaba procesado', dedupeErr);
+      pagosStore = null;
+    }
+
+    // --------------------------------------------------------
     // 2) Leemos los 3 PDFs (van empaquetados junto a la función)
     // --------------------------------------------------------
     const retoPdf = fs.readFileSync(path.join(__dirname, 'assets', 'reto-21-dias-completo.pdf')).toString('base64');
@@ -130,6 +154,10 @@ exports.handler = async (event) => {
 
     if (!emailRes.ok) {
       console.error('Error enviando el mail', await emailRes.text());
+      // Liberamos la reserva para que un reintento de Mercado Pago pueda volver a probar.
+      if (pagosStore) {
+        try { await pagosStore.delete(String(payment.id)); } catch (e) { /* ignorar */ }
+      }
       return { statusCode: 200, body: 'pago aprobado, pero falló el envío del mail' };
     }
 
@@ -203,7 +231,7 @@ exports.handler = async (event) => {
               {
                 event_name: 'Purchase',
                 event_id: String(payment.id),
-                event_time: Math.floor(Date.now() / 1000),
+                event_time: Math.floor((payment.date_approved ? new Date(payment.date_approved).getTime() : Date.now()) / 1000),
                 action_source: 'website',
                 event_source_url: 'https://santibelfiore.netlify.app/reto-21-dias',
                 user_data: { em: [hashedEmail] },

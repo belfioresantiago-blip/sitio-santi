@@ -210,17 +210,16 @@ p { margin: 0 0 14px; }
 
   // Ofertas y recomendación según el estado dominante.
   var OFFERS = {
-    guia: { n: "Guía gratuita: 5 hábitos no negociables", u: "/recursos/guia-5-habitos-no-negociables.pdf", b: "Descargar la guía →", ev: "TestAGuia" },
     reto: { n: "Reto de 21 días", u: "/reto-21-dias", b: "Quiero entrar al Reto →", ev: "TestAReto" },
     sala: { n: "Sala El Despertar", u: "https://sala-santi-belfiore.onrender.com/", b: "Entrar a la Sala →", ev: "TestASala" }
   };
   var NEXT = {
-    "APATÍA": ["guia", "Cuando la energía está baja, lo que sirve es un primer movimiento chico. La guía te da cinco hábitos para empezar hoy, sin compromiso."],
-    "MIEDO": ["guia", "El miedo se achica con acciones pequeñas y repetidas. Empezá por los cinco hábitos de la guía: son pasos que podés sostener."],
+    "APATÍA": ["reto", "Cuando la energía está baja, lo que más sirve es un sistema chico y diario: no tenés que decidir qué hacer, solo hacer el día. Con acompañamiento, el primer paso deja de pesar."],
+    "MIEDO": ["reto", "El miedo se achica con acciones pequeñas y repetidas. Cada día del Reto es una de esas acciones, con gente que te sostiene mientras las hacés."],
     "DESEO": ["reto", "Tenés energía para ir por más, pero sin estructura se te va en empezar cosas. En 21 días con plan diario y seguimiento, el deseo se convierte en hábito."],
     "IRA": ["reto", "Tu energía es alta pero se dispersa. En 21 días con un plan y acompañamiento la llevás a decidir en lugar de reaccionar."],
     "ORGULLO": ["reto", "Estás cerca de la línea y lo que te falta es estructura y compañía. En 21 días con seguimiento, pedir ayuda deja de ser un tema."],
-    "CORAJE": ["reto", "Tu coraje ya está: falta que no dependa del ánimo. Un plan diario y seguimiento durante 21 días lo vuelven sistema."],
+    "CORAJE": ["sala", "Ya cruzaste la línea de 200. Lo que sigue no es más motivación: es sostén. En la Sala tenés mentorías y una comunidad que te empuja a seguir subiendo."],
     "VOLUNTAD": ["sala", "Ya sostenés lo que decidís. El siguiente paso es hacerlo en comunidad, con gente que también está en ese nivel."],
     "ACEPTACIÓN": ["sala", "Estás en un estado para servir. La Sala te da un espacio para compartir lo que aprendiste y seguir creciendo."]
   };
@@ -441,7 +440,7 @@ p { margin: 0 0 14px; }
         "<p><strong>Reto de 21 días: dejá de abandonar lo que empezás</strong></p>" +
         '<p class="small">Tres etapas de 7 días: Romper, Construir y Consolidar. ' + nx[1] + "</p>" +
         '<ul class="stack">' +
-        li("21 módulos, uno por día", "Cada día trae su tarea definida. No pensás qué hacer: lo hacés.") +
+        li("21 módulos y la guía completa en PDF", "Cada día trae su tarea definida, paso a paso. No pensás qué hacer: lo hacés.") +
         li("Mentalidad, entrenamiento y nutrición en un solo sistema", "Rutina PPL con progresión, calculadora de macros y una sección diaria de Confrontación para trabajar lo que te frena.") +
         li("Comunidad privada de Ganadores y grupo de WhatsApp", "Gente que está en lo mismo que vos, todos los días.") +
         li("Bonus: Mapa de la Conciencia", "Lo que hiciste hoy llevado a tu día a día: cómo subir de nivel en lo concreto.") +

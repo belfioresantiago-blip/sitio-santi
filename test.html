@@ -46,11 +46,10 @@ body {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-body.hasbar { padding-bottom: 120px; }
 .topbar { position: fixed; left: 0; right: 0; top: 0; height: 3px; background: var(--line); z-index: 20; }
 .topbar i { display: block; height: 100%; width: 0; background: var(--amber); transition: width 0.4s ease; }
 .wrap { max-width: 560px; margin: 0 auto; }
-.brand { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--amber); font-weight: 700; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 22px; }
+.brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--amber); font-weight: 700; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 22px; }
 .card { border: 1px solid var(--line); background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-radius: 24px; padding: 28px 22px; }
 .screen { animation: rise 0.4s ease both; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -99,31 +98,39 @@ p { margin: 0 0 14px; }
 .box p:last-child { margin-bottom: 0; }
 .fallback { width: 100%; margin-top: 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.logo { width: 76px; height: 76px; object-fit: cover; border-radius: 20px; display: block; box-shadow: 0 0 36px rgba(242, 164, 58, 0.35); }
+.brandcol { flex-direction: column; gap: 10px; }
+.vs { display: grid; gap: 12px; margin: 18px 0 8px; }
+.vs .side { border: 1px solid var(--line); border-radius: 18px; padding: 16px 16px 6px; background: rgba(0, 0, 0, 0.22); }
+.vs .side.p { border-color: rgba(242, 164, 58, 0.55); background: rgba(242, 164, 58, 0.07); }
+.vs h3 { margin-bottom: 4px; }
+.vs .rng { font-size: 12.5px; color: var(--muted); margin: 0 0 8px; }
+.vs .side.f h3 { color: var(--muted); }
+.stack { list-style: none; padding: 0; margin: 12px 0 14px; display: grid; gap: 10px; }
+.stack li { position: relative; padding-left: 26px; font-size: 15px; }
+.stack li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--amber); font-weight: 800; }
+.stack li b { display: block; }
+.stack li span { color: var(--muted); font-size: 14px; }
 .foot { color: var(--muted); font-size: 12.5px; margin: 18px 6px 0; max-width: 56ch; }
-#bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgba(13, 10, 7, 0.94); border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-#bar span { font-size: 14px; min-width: 0; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 
 <div class="topbar" aria-hidden="true"><i id="prog"></i></div>
 <div class="wrap">
   <header class="brand">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 20a9 9 0 0 1 18 0"/><path d="M2 24h24"/><path d="M14 5v3M5.5 9.5l2 2M22.5 9.5l-2 2"/></svg>
+    <img class="logo" alt="Logo SB, Sala Despertar" width="76" height="76" src="/logo-sb.jpg">
     Sala Despertar
   </header>
   <main id="app" class="card"></main>
   <p class="foot">Basado en el mapa de niveles de consciencia del Dr. David R. Hawkins. Es una herramienta de autoconocimiento, no un diagnóstico ni una medición científica. Guardamos tu nombre, tu contacto y tu resultado para acompañarte en tu próximo paso.</p>
-</div>
-<div id="bar" hidden>
-  <span>Contale tu meta a Santi</span>
-  <a class="btn slim" id="barlink" target="_blank" rel="noopener" href="#">Enviar mi resultado</a>
 </div>
 
 <script>
 (function () {
   var CONFIG = {
     whatsapp: "5491159436724", // número con código de país y sin signos, por ejemplo 5491112345678
-    instagram: "https://instagram.com/santibelfiore"
+    instagram: "https://instagram.com/santibelfiore",
+    precioUrl: "/precio.json" // el MISMO archivo que usa la página del Reto: si cambiás el precio ahí, el test lo toma solo
   };
 
   // Mapa de niveles (valor de Hawkins) de arriba hacia abajo.
@@ -201,10 +208,26 @@ p { margin: 0 0 14px; }
     { max: 1000, t: ["LA ", "ACEPTACIÓN"], d: "Hoy estás operando desde la aceptación o más arriba: tomás lo que pasa como información y no como amenaza, y tu energía queda libre para crear y servir. Tu desafío ahora es cuidar ese estado con ritmo, silencio y práctica, y ponerlo al servicio de otros.", c: "Compartí con alguien algo que aprendiste esta semana: enseñar afianza el estado." }
   ];
 
+  // Ofertas y recomendación según el estado dominante.
+  var OFFERS = {
+    guia: { n: "Guía gratuita: 5 hábitos no negociables", u: "/recursos/guia-5-habitos-no-negociables.pdf", b: "Descargar la guía →", ev: "TestAGuia" },
+    reto: { n: "Reto de 21 días", u: "/reto-21-dias", b: "Quiero entrar al Reto →", ev: "TestAReto" },
+    sala: { n: "Sala El Despertar", u: "https://sala-santi-belfiore.onrender.com/", b: "Entrar a la Sala →", ev: "TestASala" }
+  };
+  var NEXT = {
+    "APATÍA": ["guia", "Cuando la energía está baja, lo que sirve es un primer movimiento chico. La guía te da cinco hábitos para empezar hoy, sin compromiso."],
+    "MIEDO": ["guia", "El miedo se achica con acciones pequeñas y repetidas. Empezá por los cinco hábitos de la guía: son pasos que podés sostener."],
+    "DESEO": ["reto", "Tenés energía para ir por más, pero sin estructura se te va en empezar cosas. En 21 días con plan diario y seguimiento, el deseo se convierte en hábito."],
+    "IRA": ["reto", "Tu energía es alta pero se dispersa. En 21 días con un plan y acompañamiento la llevás a decidir en lugar de reaccionar."],
+    "ORGULLO": ["reto", "Estás cerca de la línea y lo que te falta es estructura y compañía. En 21 días con seguimiento, pedir ayuda deja de ser un tema."],
+    "CORAJE": ["reto", "Tu coraje ya está: falta que no dependa del ánimo. Un plan diario y seguimiento durante 21 días lo vuelven sistema."],
+    "VOLUNTAD": ["sala", "Ya sostenés lo que decidís. El siguiente paso es hacerlo en comunidad, con gente que también está en ese nivel."],
+    "ACEPTACIÓN": ["sala", "Estás en un estado para servir. La Sala te da un espacio para compartir lo que aprendiste y seguir creciendo."]
+  };
+  var PRACT = {"APATÍA": ["Salí a caminar 10 minutos con luz natural, hoy. El movimiento es lo primero que rompe la inercia.", "Elegí UNA tarea de menos de 5 minutos y terminala. Cerrar algo chico devuelve la sensación de poder hacer.", "Hablá con una persona de confianza. No para que te resuelva nada: para que te escuche."], "MIEDO": ["Escribí tu miedo en una frase concreta: «tengo miedo de que…». Un miedo con nombre pesa menos que uno difuso.", "Preguntate: ¿qué es lo peor que puede pasar y cómo lo resolvería? Casi siempre tenés una respuesta.", "Hacé una acción de 5 minutos que roce ese miedo: mandar el mensaje, preguntar el precio, publicar."], "DESEO": ["Anotá 3 cosas que hoy tenés y que alguna vez deseaste. Entrená el registro de lo que ya llegó.", "Elegí UNA meta para la semana. Las demás van a una lista que se llama «después».", "Antes de comprar o empezar algo nuevo, esperá 24 horas. Si sigue teniendo sentido, adelante."], "IRA": ["Regla de la hora: no respondas lo que te enoja hasta que pase una hora.", "Escribí qué querés conseguir de verdad en ese conflicto. Muchas veces es respeto, no ganar.", "Descargá el cuerpo antes de una conversación difícil: caminá rápido o entrená 15 minutos."], "ORGULLO": ["Pedí ayuda concreta en una sola cosa esta semana. Observá qué sentís al hacerlo.", "Contale a alguien algo en lo que no sabés o te equivocaste, sin justificarte.", "En una conversación, hacé una pregunta genuina en lugar de dar tu opinión."], "CORAJE": ["Definí un mínimo diario de 20 minutos que no se negocia, y hacelo incluso los días sin ganas.", "Cada noche anotá una acción valiente del día. Lo que se registra se repite.", "Elegí a una persona que te dé seguimiento semanal. El coraje se sostiene mejor acompañado."], "VOLUNTAD": ["Elegí una obligación y reformulala como elección: «elijo hacerlo porque…».", "Reservá una hora semanal sin objetivo productivo. Es parte del rendimiento, no un lujo.", "Sumate a un grupo donde haya gente un paso más adelante que vos."], "ACEPTACIÓN": ["Reservá 10 minutos diarios de silencio, sin pantalla.", "Enseñale algo que sabés a otra persona esta semana. Enseñar afianza el estado.", "Ante algo que no podés cambiar, escribí: «esto es así; lo que sí depende de mí es…»."]};
+
   var app = document.getElementById("app");
   var prog = document.getElementById("prog");
-  var bar = document.getElementById("bar");
-  var barlink = document.getElementById("barlink");
 
   var steps = [{ t: "name" }];
   Q.forEach(function (_, i) { steps.push({ t: "q", i: i }); });
@@ -228,8 +251,6 @@ p { margin: 0 0 14px; }
 
   function go(n) {
     cur = n;
-    bar.hidden = true;
-    document.body.classList.remove("hasbar");
     setProgress();
     if (cur < 0) return intro();
     if (cur >= steps.length) return showResult();
@@ -251,7 +272,17 @@ p { margin: 0 0 14px; }
       '<p class="eyebrow amb" style="margin-top:10px">Antes de empezar</p>' +
       "<h1>¿Desde dónde estás operando: <em>fuerza o poder</em>?</h1>" +
       '<p class="lead">Sacá una foto honesta de tu punto de partida. 8 situaciones reales, unos 3 minutos. Al final vas a ver algo que muy poca gente ve de sí misma.</p>' +
-      '<p class="small">No hay respuestas correctas. Respondé lo que DE VERDAD pasa dentro tuyo, no lo que te gustaría que pasara.</p>' +
+      '<div class="panel" style="margin-top:20px"><h3>Fuerza y poder, en simple</h3>' +
+      '<p>El Dr. David Hawkins, psiquiatra e investigador de la consciencia, ordenó los estados emocionales en una escala según cuánta energía te dan o te quitan. En su libro «Poder vs. Fuerza» llama <strong>fuerza</strong> a lo que te vacía y <strong>poder</strong> a lo que te llena. La línea que las separa está en el <strong>200</strong>: el coraje.</p>' +
+      '<div class="vs">' +
+      '<div class="side f"><h3>Fuerza · debajo de 200</h3><p class="rng">Vergüenza, culpa, apatía, miedo, deseo, ira, orgullo.</p>' +
+      '<p>Actuás desde la <strong>carencia</strong>: «me falta algo y tengo que conseguirlo, defenderlo o demostrarlo». Se mueve <em>contra</em> algo (una presión, un rival, un miedo), gasta energía y deja cansancio.</p>' +
+      '<p class="small">Ejemplo: trabajar 14 horas porque te da miedo que no alcance.</p></div>' +
+      '<div class="side p"><h3>Poder · 200 o más</h3><p class="rng">Coraje, neutralidad, voluntad, aceptación, razón, amor, alegría, paz.</p>' +
+      '<p>Actuás desde el <strong>sentido</strong>: «sé lo que valgo y lo que quiero aportar». Se mueve <em>a favor</em> de algo, no necesita enemigo, atrae en lugar de empujar y suma energía.</p>' +
+      '<p class="small">Ejemplo: trabajar las mismas horas porque disfrutás lo que estás construyendo.</p></div></div>' +
+      '<p class="small" style="margin:6px 0 0">Ninguno es «bueno» o «malo». Todos pasamos por los dos, incluso en el mismo día. Lo que cambia tu vida es desde cuál decidís. Este test te muestra cuál estás usando hoy.</p></div>' +
+      '<p class="small" style="margin-top:16px">No hay respuestas correctas. Respondé lo que DE VERDAD pasa dentro tuyo, no lo que te gustaría que pasara.</p>' +
       '<button type="button" class="btn block" id="go" style="margin-top:8px">Medir mi nivel de consciencia →</button>' +
       "</div>";
     document.getElementById("go").addEventListener("click", function () {
@@ -381,6 +412,7 @@ p { margin: 0 0 14px; }
       "Brújula: " + r.fuerza + " de 8 desde la Fuerza, " + r.poder + " desde el Poder."
     ];
     SEG.forEach(function (s, i) { if (sa[i]) lines.push(s.k + ": " + sa[i] + "."); });
+    if (r.offer) lines.push("Me recomendaron: " + r.offer + ".");
     lines.push("Mi meta de esta semana: " + (meta && meta.trim() ? meta.trim() : "te la cuento por acá."));
     return lines.join("\n");
   }
@@ -391,20 +423,54 @@ p { margin: 0 0 14px; }
       : CONFIG.instagram;
   }
 
-  function nextStep(r) {
-    if (r.mean < 200) {
-      return "<p><b>Estás por debajo de la línea de 200.</b> Más que otra teoría, lo que te mueve ahora es estructura y una racha de acción: 21 días de hábitos no negociables, con plan diario y seguimiento.</p>" +
-        '<a class="btn block" href="reto-21-dias" onclick="if(typeof fbq!==\'undefined\'){fbq(\'trackCustom\',\'TestAReto\');}">Empezar el Reto de 21 días →</a>';
+  function track(ev) { try { if (typeof fbq !== "undefined") { fbq("trackCustom", ev); } } catch (e) {} }
+
+  function adviceHref() {
+    var r = result;
+    var t = "Hola Santi, soy " + name + ". Hice el test de consciencia de Sala Despertar (estado: " +
+      (r.st.t[0] + r.st.t[1]).toLowerCase() + "). Me recomendaron: " + r.offer + ". Quiero reservar la sesión de claridad gratis.";
+    return CONFIG.whatsapp ? "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(t) : CONFIG.instagram;
+  }
+
+  function li(t, d) { return "<li><b>" + t + "</b><span>" + d + "</span></li>"; }
+
+  function offerHtml(of, nx) {
+    var h = '<div class="box hl"><h3>Una invitación, sin letra chica</h3>';
+    if (nx[0] === "reto") {
+      h += "<p>Lo que viste hoy es tu punto de partida. Si querés que esta semana sea el primero de 21 días distintos, esto es lo que armé para vos.</p>" +
+        "<p><strong>Reto de 21 días: dejá de abandonar lo que empezás</strong></p>" +
+        '<p class="small">Tres etapas de 7 días: Romper, Construir y Consolidar. ' + nx[1] + "</p>" +
+        '<ul class="stack">' +
+        li("21 módulos, uno por día", "Cada día trae su tarea definida. No pensás qué hacer: lo hacés.") +
+        li("Mentalidad, entrenamiento y nutrición en un solo sistema", "Rutina PPL con progresión, calculadora de macros y una sección diaria de Confrontación para trabajar lo que te frena.") +
+        li("Comunidad privada de Ganadores y grupo de WhatsApp", "Gente que está en lo mismo que vos, todos los días.") +
+        li("Bonus: Mapa de la Conciencia", "Lo que hiciste hoy llevado a tu día a día: cómo subir de nivel en lo concreto.") +
+        li("Sesión de claridad 1 a 1 con Santi · sin costo", "30 minutos para mirar tu resultado juntos. Es tuya aunque decidas no entrar.") +
+        li("Mi compromiso con el tuyo", "Si fallás un día, reiniciás desde el Día 1 y yo sigo ahí. No hay devolución mágica: hay compromiso de los dos.") +
+        "</ul>" +
+        '<p class="small"><strong>Es para vos si</strong> ya sabés qué hacer y no lográs sostenerlo, y podés darle 20 minutos diarios y entrenar. <strong>No es para vos si</strong> buscás resultados mágicos sin constancia.</p>' +
+        ('<p id="precioln" hidden><strong>Inversión: <span id="precio"></span></strong> · pago único</p>') +
+        '<a class="btn block" href="' + of.u + '" onclick="track(\'' + of.ev + '\')">' + of.b + "</a>" +
+        '<div class="actions"><a class="btn ghost slim" id="advise" target="_blank" rel="noopener" onclick="track(\'TestASesion\')" href="' + adviceHref() + '">Antes quiero hablar con Santi (sesión gratis)</a></div>';
+    } else {
+      h += "<p>Si lo que viste te sirvió, esto es lo que puedo hacer por vos. No hace falta que decidas nada hoy.</p>" +
+        '<ul class="stack">' +
+        li("Sesión de claridad 1 a 1 con Santi · sin costo", "30 minutos. Miramos tu resultado juntos y te digo con honestidad qué haría en tu lugar.") +
+        li(of.n, nx[1]) +
+        li("Acompañamiento por WhatsApp los primeros 7 días", "Para que no te quedes solo con el plan cuando aparezca la duda.") +
+        "</ul>" +
+        '<a class="btn block" href="' + of.u + '" onclick="track(\'' + of.ev + '\')">' + of.b + "</a>" +
+        '<div class="actions"><a class="btn ghost slim" id="advise" target="_blank" rel="noopener" onclick="track(\'TestASesion\')" href="' + adviceHref() + '">Antes quiero hablar con Santi (sesión gratis)</a></div>';
     }
-    return "<p><b>Ya cruzaste la línea de 200.</b> Lo que sigue no es más motivación, es sostén: mentorías en vivo cada semana y una comunidad que te empuja a seguir subiendo.</p>" +
-      '<a class="btn block" href="https://sala-santi-belfiore.onrender.com/" onclick="if(typeof fbq!==\'undefined\'){fbq(\'trackCustom\',\'TestASala\');}">Conocer la Sala El Despertar →</a>' +
-      '<p class="small" style="margin:12px 0 0">¿Preferís empezar más liviano? <a href="reto-21-dias" style="color:var(--amber)">Mirá el Reto de 21 días</a>.</p>';
+    return h + '<p class="small" style="margin:14px 0 0">Si no es para vos, también está bien: el test y tus prácticas ya son tuyos.</p></div>';
   }
 
   function showResult() {
     result = compute();
     if (typeof fbq !== "undefined") { fbq("trackCustom", "TestCompletado"); }
     var r = result;
+    var nx = NEXT[r.st.t[1]], of = OFFERS[nx[0]];
+    r.offer = of.n;
     var rows = "";
     MAP.forEach(function (m, i) {
       var inZone = Math.abs(i - r.near) <= 1;
@@ -425,20 +491,30 @@ p { margin: 0 0 14px; }
       '<div class="compass" role="img" aria-label="' + r.fuerza + " respuestas desde la fuerza y " + r.poder + ' desde el poder"><b class="f" style="width:' + (r.fuerza / 8 * 100) + '%"></b><b class="p" style="width:' + (r.poder / 8 * 100) + '%"></b></div>' +
       '<div class="ends"><span>' + r.fuerza + " de 8 desde la Fuerza</span><span>" + r.poder + " desde el Poder</span></div></div>" +
       '<p class="quote">Esto no es quién sos. Es desde dónde estás operando hoy, y el estado se mueve.</p>' +
-      '<div class="box hl"><h3>Tu siguiente paso</h3>' + nextStep(r) + "</div>" +
       '<div class="box"><h3>Tu consigna de la semana</h3><p>' + r.st.c + "</p></div>" +
+      '<div class="box"><h3>Tus 3 prácticas de esta semana</h3><ul class="stack">' + PRACT[r.st.t[1]].map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" +
+      '<p class="small">Elegí una y hacela hoy. No hace falta las tres: hace falta empezar.</p></div>' +
       '<div class="box hl"><h3>Tu primera declaración</h3>' +
       "<p>Las metas que se quedan en la cabeza se negocian solas. Las que se dicen en voz alta pesan distinto. Escribí tu meta de esta semana y mandásela a Santi junto con tu resultado.</p>" +
       '<div class="field"><label for="meta">Mi meta de esta semana</label><textarea id="meta" rows="2" maxlength="200" placeholder="Esta semana voy a…"></textarea></div>' +
       '<a class="btn block" id="declare" target="_blank" rel="noopener" href="#">Declarar mi meta →</a>' +
       '<div class="actions"><button type="button" class="btn ghost slim" id="copy">Copiar mi resultado</button><button type="button" class="btn ghost slim" id="again">Repetir el test</button></div>' +
       '<textarea class="fallback" id="fb" rows="4" hidden readonly aria-label="Texto para copiar"></textarea></div>' +
+      offerHtml(of, nx) +
       "</div>";
 
     document.getElementById("who").textContent = name.toUpperCase();
+    if (nx[0] === "reto" && CONFIG.precioUrl) {
+      try {
+        fetch(CONFIG.precioUrl + "?v=" + Date.now(), { cache: "no-store" }).then(function (x) { return x.ok ? x.json() : null; }).then(function (j) {
+          var n = j && Number(j.precio);
+          if (n > 0) { document.getElementById("precio").textContent = "$" + n.toLocaleString("es-AR"); document.getElementById("precioln").hidden = false; }
+        }).catch(function () {});
+      } catch (e) {}
+    }
     var meta = document.getElementById("meta");
     var declare = document.getElementById("declare");
-    function sync() { var h = contactHref(meta.value); declare.href = h; barlink.href = h; }
+    function sync() { var h = contactHref(meta.value); declare.href = h; }
     sync();
     meta.addEventListener("input", sync);
 
@@ -450,8 +526,6 @@ p { margin: 0 0 14px; }
     });
     document.getElementById("again").addEventListener("click", function () { window.scrollTo(0, 0); go(-1); });
 
-    bar.hidden = false;
-    document.body.classList.add("hasbar");
     prog.style.width = "100%";
     window.scrollTo(0, 0);
   }
